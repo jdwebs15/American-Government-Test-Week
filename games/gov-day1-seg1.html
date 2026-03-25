@@ -1,172 +1,546 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<title>Day 1 Segment 1</title>
-<link rel="stylesheet" href="../styles.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Government Test Week — Day 1 Segment 1</title>
+  <link rel="stylesheet" href="../styles.css" />
 </head>
-
 <body>
-<div class="wrap">
-
-<div class="topbar">
-  <button class="restart" onclick="restart()">Restart</button>
-  <div id="timer">00:00</div>
-</div>
-
-<h2>Segment 1 — Recognition</h2>
-
-<div id="app"></div>
-
-<button onclick="submitTest()">Submit</button>
-
-</div>
+  <div class="wrap" id="app"></div>
 
 <script>
-const ENDPOINT = "PASTE_YOUR_APPS_SCRIPT_URL";
+const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
-let name = prompt("Enter your name");
-if(!name){location.reload();}
+const TEST_META = {
+  subject: "Government",
+  week: "Test Week",
+  day: "Day 1",
+  segment: "Segment 1",
+  title: "Government Test Week — Day 1 Segment 1",
+  focus: "Recognition"
+};
 
-let start = new Date();
-
-let questions = [
-
-{ id:"G1", cs:"CS 1", type:"mc",
-  q:"Government gets its power from the people refers to",
-  choices:["Federalism","Popular sovereignty","Checks and balances","Judicial review"],
-  answer:[1]
-},
-
-{ id:"G2", cs:"CS 2", type:"mc",
-  q:"Power shared between national and state governments is",
-  choices:["Federalism","Limited government","Republicanism","Due process"],
-  answer:[0]
-},
-
-{ id:"G3", cs:"CS 3", type:"multi",
-  q:"Select TWO powers of Congress",
-  choices:["Declare war","Interpret laws","Coin money","Enforce laws"],
-  answer:[0,2]
-},
-
-{ id:"G4", cs:"CS 5", type:"mc",
-  q:"Which amendment protects speech?",
-  choices:["1st","2nd","4th","5th"],
-  answer:[0]
-},
-
-{ id:"G5", cs:"CS 6", type:"mc",
-  q:"Judicial review was established in",
-  choices:["McCulloch v. Maryland","Marbury v. Madison","Gibbons v. Ogden","Brown v. Board"],
-  answer:[1]
-},
-
-{ id:"G6", cs:"CS 8", type:"mc",
-  q:"The 14th Amendment is important because it",
-  choices:[
-    "Limits Congress",
-    "Extends rights to states",
-    "Ends slavery",
-    "Gives voting rights"
-  ],
-  answer:[1]
-},
-
-{ id:"G7", cs:"CS 10", type:"multi",
-  q:"Select TWO rights of the accused",
-  choices:[
-    "Speedy trial",
-    "Bear arms",
-    "Trial by jury",
-    "Freedom of religion"
-  ],
-  answer:[0,2]
-},
-
-{ id:"G8", cs:"CS 12", type:"mc",
-  q:"The President is part of which branch?",
-  choices:["Legislative","Executive","Judicial","State"],
-  answer:[1]
-},
-
-{ id:"G9", cs:"CS 14", type:"mc",
-  q:"Which group influences policy but is not elected?",
-  choices:["Congress","Interest groups","Courts","Cabinet"],
-  answer:[1]
-},
-
-{ id:"G10", cs:"CS 15", type:"mc",
-  q:"Primary elections are used to",
-  choices:[
-    "Elect president",
-    "Choose party candidates",
-    "Pass laws",
-    "Appoint judges"
-  ],
-  answer:[1]
-}
-
+const QUESTIONS = [
+  {
+    id: "GOV_D1_S1_Q01",
+    cs: "CS 5",
+    type: "mc",
+    stem: "Government gets its authority from the people. Which constitutional principle does this describe?",
+    choices: ["Federalism","Popular sovereignty","Judicial review","Due process"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q02",
+    cs: "CS 5",
+    type: "mc",
+    stem: "A mayor says the city cannot act beyond powers granted by law. Which principle is best illustrated?",
+    choices: ["Popular sovereignty","Limited government","Checks and balances","Judicial review"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q03",
+    cs: "CS 5",
+    type: "mc",
+    stem: "Power divided among legislative, executive, and judicial branches is known as",
+    choices: ["Federalism","Separation of powers","Republicanism","Incorporation"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q04",
+    cs: "CS 5",
+    type: "mc",
+    stem: "When one branch can limit the power of another branch, this is called",
+    choices: ["Checks and balances","Federalism","Popular sovereignty","Enumerated powers"],
+    answer: [0]
+  },
+  {
+    id: "GOV_D1_S1_Q05",
+    cs: "CS 6",
+    type: "mc",
+    stem: "Which phrase best describes federalism?",
+    choices: [
+      "Power shared between national and state governments",
+      "Judges reviewing laws for constitutionality",
+      "Citizens choosing elected officials",
+      "One branch making all laws"
+    ],
+    answer: [0]
+  },
+  {
+    id: "GOV_D1_S1_Q06",
+    cs: "CS 6",
+    type: "mc",
+    stem: "Which level of government is mainly responsible for conducting foreign policy?",
+    choices: ["Local","State","Federal","County"],
+    answer: [2]
+  },
+  {
+    id: "GOV_D1_S1_Q07",
+    cs: "CS 7",
+    type: "mc",
+    stem: "Marbury v. Madison is most closely associated with",
+    choices: ["Implied powers","Judicial review","Executive privilege","States’ rights"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q08",
+    cs: "CS 7",
+    type: "mc",
+    stem: "McCulloch v. Maryland strengthened the power of the national government by supporting the idea of",
+    choices: ["Reserved powers","Strict neutrality","Implied powers","State nullification"],
+    answer: [2]
+  },
+  {
+    id: "GOV_D1_S1_Q09",
+    cs: "CS 7",
+    type: "mc",
+    stem: "Gibbons v. Ogden expanded national authority over",
+    choices: ["Public schools","Interstate commerce","Criminal trials","State constitutions"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q10",
+    cs: "CS 8",
+    type: "mc",
+    stem: "The First Amendment protects",
+    choices: ["Trial by jury","Freedom of speech","Protection from self-incrimination","The right to bear arms"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q11",
+    cs: "CS 8",
+    type: "mc",
+    stem: "Protection against unreasonable searches and seizures is found in the",
+    choices: ["Second Amendment","Fourth Amendment","Fifth Amendment","Eighth Amendment"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q12",
+    cs: "CS 8",
+    type: "mc",
+    stem: "Which amendment protects a person from being tried twice for the same crime?",
+    choices: ["First","Fourth","Fifth","Tenth"],
+    answer: [2]
+  },
+  {
+    id: "GOV_D1_S1_Q13",
+    cs: "CS 8",
+    type: "mc",
+    stem: "The right to a speedy and public trial is protected by the",
+    choices: ["Fourth Amendment","Fifth Amendment","Sixth Amendment","Eighth Amendment"],
+    answer: [2]
+  },
+  {
+    id: "GOV_D1_S1_Q14",
+    cs: "CS 8",
+    type: "mc",
+    stem: "Which amendment reserves powers not delegated to the national government to the states or the people?",
+    choices: ["Ninth","Tenth","Thirteenth","Fourteenth"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q15",
+    cs: "CS 9",
+    type: "mc",
+    stem: "The Fourteenth Amendment is especially important because it extended due process and equal protection against actions by",
+    choices: ["Only Congress","State governments","Foreign governments","Only the courts"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q16",
+    cs: "CS 10",
+    type: "mc",
+    stem: "A person accused of a crime cannot be forced to testify against himself. This protection is part of",
+    choices: ["The establishment clause","Protection from self-incrimination","Freedom of assembly","Reserved powers"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q17",
+    cs: "CS 11",
+    type: "mc",
+    stem: "Which branch of government is primarily responsible for carrying out laws?",
+    choices: ["Legislative","Executive","Judicial","County"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q18",
+    cs: "CS 11",
+    type: "mc",
+    stem: "Which branch interprets laws and decides cases?",
+    choices: ["Executive","Legislative","Judicial","Cabinet"],
+    answer: [2]
+  },
+  {
+    id: "GOV_D1_S1_Q19",
+    cs: "CS 12",
+    type: "mc",
+    stem: "A presidential veto is an example of",
+    choices: ["Popular sovereignty","Checks and balances","Federalism","Incorporation"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q20",
+    cs: "CS 13",
+    type: "mc",
+    stem: "Political parties mainly help citizens by",
+    choices: [
+      "Interpreting the Constitution",
+      "Selecting candidates and organizing issues",
+      "Declaring laws unconstitutional",
+      "Appointing federal judges"
+    ],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q21",
+    cs: "CS 13",
+    type: "mc",
+    stem: "Which organization most directly tries to influence public policy on behalf of a cause or group?",
+    choices: ["Interest group","County board","Jury","Cabinet department"],
+    answer: [0]
+  },
+  {
+    id: "GOV_D1_S1_Q22",
+    cs: "CS 14",
+    type: "mc",
+    stem: "The media can influence public policy by",
+    choices: [
+      "Writing court opinions",
+      "Setting the agenda for issues people notice",
+      "Enforcing federal laws",
+      "Printing money"
+    ],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q23",
+    cs: "CS 18",
+    type: "mc",
+    stem: "An issue debated by government and the public is best described as a",
+    choices: ["Judicial review","Public policy issue","Reserved power","Civil lawsuit"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q24",
+    cs: "CS 20",
+    type: "mc",
+    stem: "When Congress changes taxes and government spending to influence the economy, it is using",
+    choices: ["Monetary policy","Fiscal policy","Judicial restraint","Foreign policy"],
+    answer: [1]
+  },
+  {
+    id: "GOV_D1_S1_Q25",
+    cs: "CS 21",
+    type: "mc",
+    stem: "Which institution manages monetary policy in the United States?",
+    choices: ["Supreme Court","Congressional Budget Office","Federal Reserve","Treasury of Ohio"],
+    answer: [2]
+  }
 ];
 
-// fill to 25 automatically
-while(questions.length < 25){
-  let base = questions[Math.floor(Math.random()*questions.length)];
-  questions.push({...base, id: base.id + "_X" + questions.length});
+const STORAGE_KEY = "LEGEND_GOV_D1_S1_STATE";
+
+function nowLocalString(d){
+  return new Date(d).toLocaleString();
+}
+function formatRuntime(seconds){
+  const m = Math.floor(seconds / 60).toString().padStart(2,"0");
+  const s = Math.floor(seconds % 60).toString().padStart(2,"0");
+  return `${m}:${s}`;
+}
+function letter(i){
+  return ["A","B","C","D","E","F"][i] || "";
 }
 
-let current = 0;
-let answers = {};
+let state = {
+  studentName: "",
+  startedAt: null,
+  current: 0,
+  answers: Array(QUESTIONS.length).fill(null),
+  submitted: false,
+  score: null
+};
 
-function render(){
-  let q = questions[current];
-  let html = `<h3>${current+1}. ${q.q}</h3>`;
-
-  q.choices.forEach((c,i)=>{
-    html += `<div class="choice" onclick="select(${i})">${c}</div>`;
-  });
-
-  document.getElementById("app").innerHTML = html;
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
-
-function select(i){
-  answers[current] = [i];
-  current++;
-  if(current < questions.length) render();
-  else alert("Done. Submit.");
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed && !parsed.submitted){
+        state = parsed;
+      }
+    }
+  }catch(err){}
 }
-
-function submitTest(){
-  let end = new Date();
-
-  fetch(ENDPOINT,{
-    method:"POST",
-    body:JSON.stringify({
-      name,
-      start,
-      end,
-      questions,
-      answers
-    })
-  });
-
-  alert("Submitted");
-}
-
-function restart(){
+function hardRestart(){
+  localStorage.removeItem(STORAGE_KEY);
   location.reload();
 }
+function countAnswered(){
+  return state.answers.filter(a => a !== null).length;
+}
+function isCorrect(q, answer){
+  return Array.isArray(answer) &&
+         answer.length === q.answer.length &&
+         answer.every((v, i) => v === q.answer[i]);
+}
+function buildIntro(){
+  const app = document.getElementById("app");
+  app.innerHTML = `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="panel name-card">
+      <div class="kicker">Legend Mastery Series • Government</div>
+      <h1>${TEST_META.title}</h1>
+      <p class="sub">25-question OST-style segment. Name is required to begin. Submit when finished.</p>
+      <input id="nameInput" class="input" type="text" maxlength="60" placeholder="Enter your name to begin" />
+      <div class="help">
+        Recognition-focused segment. Mostly direct concept identification and recall/application of key constitutional ideas.
+      </div>
+      <div class="footer-actions">
+        <button id="startBtn">Start Test</button>
+      </div>
+    </div>
+  `;
+  document.getElementById("startBtn").onclick = () => {
+    const name = document.getElementById("nameInput").value.trim();
+    if(!name){
+      alert("Enter your name to begin.");
+      return;
+    }
+    state.studentName = name;
+    state.startedAt = new Date().toISOString();
+    save();
+    renderTest();
+  };
+}
+function buildTopbar(){
+  const started = new Date(state.startedAt);
+  const runtime = formatRuntime((Date.now() - started.getTime()) / 1000);
+  const answered = countAnswered();
+  const progressPct = Math.round((answered / QUESTIONS.length) * 100);
+  return `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="danger" onclick="hardRestart()">Restart Test</button>
+      </div>
+      <div class="topbar-right">
+        <span class="pill">Name: ${escapeHtml(state.studentName)}</span>
+        <span class="pill">Started: ${escapeHtml(nowLocalString(started))}</span>
+        <span class="pill">Runtime: <span id="runtimeDisplay">${runtime}</span></span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Test</div><div class="stat-value">${TEST_META.day} ${TEST_META.segment}</div></div>
+        <div class="stat"><div class="stat-label">Focus</div><div class="stat-value">${TEST_META.focus}</div></div>
+        <div class="stat"><div class="stat-label">Progress</div><div class="stat-value">${answered} / ${QUESTIONS.length}</div></div>
+        <div class="stat"><div class="stat-label">Completion</div><div class="stat-value">${progressPct}%</div></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" style="width:${progressPct}%"></div></div>
+    </div>
+  `;
+}
+function renderQuestion(){
+  const q = QUESTIONS[state.current];
+  const currentAnswer = state.answers[state.current];
+  const app = document.getElementById("app");
+  app.innerHTML = buildTopbar() + `
+    <div class="panel question-card">
+      <div class="q-type">Question ${state.current + 1} of ${QUESTIONS.length} • ${q.type.toUpperCase()} • ${q.cs}</div>
+      <div class="q-stem">${escapeHtml(q.stem)}</div>
+      <div class="choices">
+        ${q.choices.map((choice, i) => `
+          <button class="choice ${currentAnswer !== null && currentAnswer[0] === i ? "selected" : ""}" onclick="selectChoice(${i})">
+            <span class="choice-letter">${letter(i)}.</span> ${escapeHtml(choice)}
+          </button>
+        `).join("")}
+      </div>
+      <div class="footer-actions">
+        <button class="secondary" ${state.current === 0 ? "disabled" : ""} onclick="prevQuestion()">Previous</button>
+        <button class="secondary" onclick="skipQuestion()">Skip</button>
+        <button class="warn" onclick="reviewScreen()">Review / Submit</button>
+      </div>
+    </div>
+  `;
+}
+function renderTest(){
+  if(state.current < 0) state.current = 0;
+  if(state.current >= QUESTIONS.length) state.current = QUESTIONS.length - 1;
+  renderQuestion();
+}
+function selectChoice(i){
+  state.answers[state.current] = [i];
+  save();
+  if(state.current < QUESTIONS.length - 1){
+    state.current++;
+    save();
+    renderQuestion();
+  }else{
+    reviewScreen();
+  }
+}
+function prevQuestion(){
+  if(state.current > 0){
+    state.current--;
+    save();
+    renderQuestion();
+  }
+}
+function skipQuestion(){
+  if(state.current < QUESTIONS.length - 1){
+    state.current++;
+    save();
+    renderQuestion();
+  }else{
+    reviewScreen();
+  }
+}
+function reviewScreen(){
+  const started = new Date(state.startedAt);
+  const runtime = formatRuntime((Date.now() - started.getTime()) / 1000);
+  const answered = countAnswered();
+  const unanswered = QUESTIONS.length - answered;
+  const app = document.getElementById("app");
+  app.innerHTML = buildTopbar() + `
+    <div class="panel">
+      <h2>Review Before Submitting</h2>
+      <p class="sub">Answered: ${answered} of ${QUESTIONS.length}. Unanswered: ${unanswered}.</p>
+      <div class="review-box">
+        ${QUESTIONS.map((q, idx) => `
+          <div class="review-item">
+            <div class="review-top">
+              <strong>Q${String(idx + 1).padStart(2,"0")}</strong>
+              <span class="tag">${q.cs}</span>
+            </div>
+            <div class="muted">${escapeHtml(q.stem)}</div>
+            <div style="margin-top:8px;">
+              ${state.answers[idx] === null
+                ? `<span class="tag">No answer</span>`
+                : `<span class="tag">Answered: ${letter(state.answers[idx][0])}</span>`
+              }
+            </div>
+            <div class="footer-actions">
+              <button class="secondary" onclick="jumpToQuestion(${idx})">Go to Question</button>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+      <hr class="sep">
+      <div class="footer-actions">
+        <button class="secondary" onclick="renderQuestion()">Back to Test</button>
+        <button onclick="submitTest()">Submit Segment</button>
+      </div>
+      <p class="help">Runtime right now: ${runtime}</p>
+    </div>
+  `;
+}
+function jumpToQuestion(idx){
+  state.current = idx;
+  save();
+  renderQuestion();
+}
+async function submitTest(){
+  if(state.submitted) return;
+  const endedAt = new Date().toISOString();
+  const score = QUESTIONS.reduce((sum, q, idx) => sum + (isCorrect(q, state.answers[idx]) ? 1 : 0), 0);
+  const accuracy = Math.round((score / QUESTIONS.length) * 100);
 
-render();
+  const payload = {
+    mode: "submit_test",
+    studentName: state.studentName,
+    subject: TEST_META.subject,
+    week: TEST_META.week,
+    day: TEST_META.day,
+    segment: TEST_META.segment,
+    title: TEST_META.title,
+    focus: TEST_META.focus,
+    startedAt: state.startedAt,
+    endedAt,
+    runtimeSeconds: Math.round((new Date(endedAt) - new Date(state.startedAt)) / 1000),
+    score,
+    total: QUESTIONS.length,
+    accuracy,
+    questions: QUESTIONS.map((q, idx) => ({
+      id: q.id,
+      cs: q.cs,
+      type: q.type,
+      stem: q.stem,
+      correctAnswer: q.answer,
+      studentAnswer: state.answers[idx],
+      correct: isCorrect(q, state.answers[idx]) ? 1 : 0
+    }))
+  };
 
-// timer
-setInterval(()=>{
-  let diff = Math.floor((new Date()-start)/1000);
-  let m = String(Math.floor(diff/60)).padStart(2,'0');
-  let s = String(diff%60).padStart(2,'0');
-  document.getElementById("timer").innerText = m+":"+s;
-},1000);
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    await res.text();
+  }catch(err){
+    alert("Submission did not reach the spreadsheet. Check the Apps Script URL and deployment settings, then try again.");
+    return;
+  }
 
+  state.submitted = true;
+  state.score = score;
+  save();
+
+  const app = document.getElementById("app");
+  app.innerHTML = `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="panel">
+      <div class="kicker">Submission Complete</div>
+      <h1>${TEST_META.title}</h1>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Name</div><div class="stat-value">${escapeHtml(state.studentName)}</div></div>
+        <div class="stat"><div class="stat-label">Date</div><div class="stat-value">${escapeHtml(new Date(endedAt).toLocaleDateString())}</div></div>
+        <div class="stat"><div class="stat-label">Start</div><div class="stat-value">${escapeHtml(nowLocalString(state.startedAt))}</div></div>
+        <div class="stat"><div class="stat-label">End</div><div class="stat-value">${escapeHtml(nowLocalString(endedAt))}</div></div>
+        <div class="stat"><div class="stat-label">Runtime</div><div class="stat-value">${formatRuntime(payload.runtimeSeconds)}</div></div>
+        <div class="stat"><div class="stat-label">Score</div><div class="stat-value">${score} / ${QUESTIONS.length}</div></div>
+        <div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value">${accuracy}%</div></div>
+        <div class="stat"><div class="stat-label">Result</div><div class="stat-value ${accuracy >= 80 ? "result-mastered" : "result-replay"}">${accuracy >= 80 ? "READY" : "REVIEW"}</div></div>
+      </div>
+      <div class="footer-actions">
+        <button class="secondary" onclick="hardRestart()">Take Again</button>
+        <button onclick="location.href='../index.html'">Back to Hub</button>
+      </div>
+    </div>
+  `;
+  localStorage.removeItem(STORAGE_KEY);
+}
+function escapeHtml(str){
+  return String(str ?? "").replace(/[&<>"']/g, s => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[s]));
+}
+function tick(){
+  const el = document.getElementById("runtimeDisplay");
+  if(el && state.startedAt){
+    el.textContent = formatRuntime((Date.now() - new Date(state.startedAt).getTime()) / 1000);
+  }
+}
+load();
+if(!state.studentName || !state.startedAt){
+  buildIntro();
+}else{
+  renderTest();
+}
+setInterval(tick, 1000);
+window.hardRestart = hardRestart;
+window.prevQuestion = prevQuestion;
+window.skipQuestion = skipQuestion;
+window.reviewScreen = reviewScreen;
+window.jumpToQuestion = jumpToQuestion;
+window.selectChoice = selectChoice;
+window.submitTest = submitTest;
 </script>
 </body>
 </html>
