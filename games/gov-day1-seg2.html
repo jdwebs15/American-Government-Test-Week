@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Day 1 Segment 2</title>
+<link rel="stylesheet" href="../styles.css"/>
+</head>
+
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <button class="restart" onclick="location.reload()">Restart</button>
+  <div id="timer"></div>
+</div>
+
+<h2>Segment 2 — Application & Reasoning</h2>
+
+<div id="app"></div>
+
+<button onclick="submitTest()">Submit</button>
+
+</div>
+
+<script>
+
+const ENDPOINT = "PASTE_URL";
+
+let name = prompt("Enter your name");
+let start = new Date();
+
+let questions = [
+
+{
+id:"S2_Q1", cs:"CS 18", type:"mc",
+q:"A governor refuses to follow a federal law. This represents a conflict over",
+choices:["Checks and balances","Federalism","Judicial review","Popular sovereignty"],
+answer:[1]
+},
+
+{
+id:"S2_Q2A", cs:"CS 18", type:"mc",
+q:"Part A: Which principle is shown?",
+choices:["Federalism","Due process","Limited government","Republicanism"],
+answer:[0]
+},
+
+{
+id:"S2_Q2B", cs:"CS 18", type:"mc",
+q:"Part B: Which evidence supports the answer?",
+choices:[
+"Conflict between state and federal power",
+"Citizen voting",
+"Courts making decisions",
+"Law enforcement actions"
+],
+answer:[0]
+},
+
+{
+id:"S2_Q3", cs:"CS 20", type:"multi",
+q:"Select TWO expansionary fiscal policies",
+choices:[
+"Increase taxes",
+"Decrease taxes",
+"Increase spending",
+"Reduce benefits"
+],
+answer:[1,2]
+},
+
+{
+id:"S2_Q4", cs:"CS 21", type:"mc",
+q:"The Federal Reserve lowering interest rates is",
+choices:["Expansionary","Contractionary","Regulatory","Judicial"],
+answer:[0]
+}
+
+];
+
+// fill to 25
+while(questions.length < 25){
+  let base = questions[Math.floor(Math.random()*questions.length)];
+  questions.push({...base, id: base.id+"_X"+questions.length});
+}
+
+let current=0;
+let answers={};
+
+function render(){
+  let q = questions[current];
+  let html = `<h3>${current+1}. ${q.q}</h3>`;
+
+  q.choices.forEach((c,i)=>{
+    html += `<div class="choice" onclick="select(${i})">${c}</div>`;
+  });
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function select(i){
+  answers[current] = [i];
+  current++;
+  if(current<questions.length) render();
+  else alert("Done");
+}
+
+function submitTest(){
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({name,start,questions,answers})
+  });
+  alert("Submitted");
+}
+
+render();
+
+</script>
+</body>
+</html>
