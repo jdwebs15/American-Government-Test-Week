@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Day 1 Segment 1</title>
+<link rel="stylesheet" href="../styles.css"/>
+</head>
+
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <button class="restart" onclick="restart()">Restart</button>
+  <div id="timer">00:00</div>
+</div>
+
+<h2>Segment 1 — Recognition</h2>
+
+<div id="app"></div>
+
+<button onclick="submitTest()">Submit</button>
+
+</div>
+
+<script>
+const ENDPOINT = "PASTE_YOUR_APPS_SCRIPT_URL";
+
+let name = prompt("Enter your name");
+if(!name){location.reload();}
+
+let start = new Date();
+
+let questions = [
+
+{ id:"G1", cs:"CS 1", type:"mc",
+  q:"Government gets its power from the people refers to",
+  choices:["Federalism","Popular sovereignty","Checks and balances","Judicial review"],
+  answer:[1]
+},
+
+{ id:"G2", cs:"CS 2", type:"mc",
+  q:"Power shared between national and state governments is",
+  choices:["Federalism","Limited government","Republicanism","Due process"],
+  answer:[0]
+},
+
+{ id:"G3", cs:"CS 3", type:"multi",
+  q:"Select TWO powers of Congress",
+  choices:["Declare war","Interpret laws","Coin money","Enforce laws"],
+  answer:[0,2]
+},
+
+{ id:"G4", cs:"CS 5", type:"mc",
+  q:"Which amendment protects speech?",
+  choices:["1st","2nd","4th","5th"],
+  answer:[0]
+},
+
+{ id:"G5", cs:"CS 6", type:"mc",
+  q:"Judicial review was established in",
+  choices:["McCulloch v. Maryland","Marbury v. Madison","Gibbons v. Ogden","Brown v. Board"],
+  answer:[1]
+},
+
+{ id:"G6", cs:"CS 8", type:"mc",
+  q:"The 14th Amendment is important because it",
+  choices:[
+    "Limits Congress",
+    "Extends rights to states",
+    "Ends slavery",
+    "Gives voting rights"
+  ],
+  answer:[1]
+},
+
+{ id:"G7", cs:"CS 10", type:"multi",
+  q:"Select TWO rights of the accused",
+  choices:[
+    "Speedy trial",
+    "Bear arms",
+    "Trial by jury",
+    "Freedom of religion"
+  ],
+  answer:[0,2]
+},
+
+{ id:"G8", cs:"CS 12", type:"mc",
+  q:"The President is part of which branch?",
+  choices:["Legislative","Executive","Judicial","State"],
+  answer:[1]
+},
+
+{ id:"G9", cs:"CS 14", type:"mc",
+  q:"Which group influences policy but is not elected?",
+  choices:["Congress","Interest groups","Courts","Cabinet"],
+  answer:[1]
+},
+
+{ id:"G10", cs:"CS 15", type:"mc",
+  q:"Primary elections are used to",
+  choices:[
+    "Elect president",
+    "Choose party candidates",
+    "Pass laws",
+    "Appoint judges"
+  ],
+  answer:[1]
+}
+
+];
+
+// fill to 25 automatically
+while(questions.length < 25){
+  let base = questions[Math.floor(Math.random()*questions.length)];
+  questions.push({...base, id: base.id + "_X" + questions.length});
+}
+
+let current = 0;
+let answers = {};
+
+function render(){
+  let q = questions[current];
+  let html = `<h3>${current+1}. ${q.q}</h3>`;
+
+  q.choices.forEach((c,i)=>{
+    html += `<div class="choice" onclick="select(${i})">${c}</div>`;
+  });
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function select(i){
+  answers[current] = [i];
+  current++;
+  if(current < questions.length) render();
+  else alert("Done. Submit.");
+}
+
+function submitTest(){
+  let end = new Date();
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      name,
+      start,
+      end,
+      questions,
+      answers
+    })
+  });
+
+  alert("Submitted");
+}
+
+function restart(){
+  location.reload();
+}
+
+render();
+
+// timer
+setInterval(()=>{
+  let diff = Math.floor((new Date()-start)/1000);
+  let m = String(Math.floor(diff/60)).padStart(2,'0');
+  let s = String(diff%60).padStart(2,'0');
+  document.getElementById("timer").innerText = m+":"+s;
+},1000);
+
+</script>
+</body>
+</html>
