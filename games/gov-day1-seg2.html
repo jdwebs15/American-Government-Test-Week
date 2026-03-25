@@ -3,325 +3,104 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Government Test Week — Day 1 Segment 2</title>
+  <title>Government Test Week — Day 1 Segment 1</title>
   <link rel="stylesheet" href="../styles.css" />
 </head>
 <body>
   <div class="wrap" id="app"></div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxMLVDL9idsp6FbHO1pYK63CQhpPM4jN0PrY2NBaULgmcN2mhMnRgEpubYUp7Y6VDqg/exec";
+const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 const TEST_META = {
   subject: "Government",
   week: "Test Week",
   day: "Day 1",
-  segment: "Segment 2",
-  title: "Government Test Week — Day 1 Segment 2",
-  focus: "Application and Reasoning"
+  segment: "Segment 1",
+  title: "Government Test Week — Day 1 Segment 1",
+  focus: "Recognition"
 };
 
-const QUESTIONS = [
-  {
-    id: "GOV_D1_S2_Q01",
-    cs: "CS 6",
-    type: "mc",
-    stimulus: "A state passes a law that conflicts with a federal law regulating the same activity. The dispute goes to court to determine which level of government has authority.",
-    stem: "Which constitutional principle is most clearly shown by this situation?",
-    choices: ["Due process","Federalism","Popular sovereignty","Judicial restraint"],
-    answer: [1]
-  },
-  {
-    id: "GOV_D1_S2_Q02",
-    cs: "CS 6",
-    type: "partab",
-    stimulus: "A city wants to create a foreign treaty with another nation on its own, but federal officials block the effort.",
-    stem: "Part A: Why would federal officials likely block the city’s action?",
-    choices: [
-      "Foreign policy is mainly a federal power",
-      "Cities can overrule states",
-      "Local governments control treaties",
-      "Counties interpret the Constitution"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q03",
-    cs: "CS 6",
-    type: "partab",
-    stimulus: "A city wants to create a foreign treaty with another nation on its own, but federal officials block the effort.",
-    stem: "Part B: Which evidence best supports the answer to Part A?",
-    choices: [
-      "The Constitution gives national government major responsibility for relations with other nations",
-      "Cities have the same sovereignty as independent countries",
-      "School boards may declare war in emergencies",
-      "Local governments create monetary policy"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q04",
-    cs: "CS 7",
-    type: "mc",
-    stimulus: "A Supreme Court case ruled that Congress could create a national bank even though the Constitution does not specifically list that power.",
-    stem: "Which constitutional idea is most directly supported by this ruling?",
-    choices: ["Reserved powers","Implied powers","Term limits","Direct democracy"],
-    answer: [1]
-  },
-  {
-    id: "GOV_D1_S2_Q05",
-    cs: "CS 7",
-    type: "mc",
-    stimulus: "A state attempts to tax a federal institution. The Court rules the state may not do so because national law is supreme.",
-    stem: "This ruling most strongly reinforces which relationship?",
-    choices: [
-      "State governments are always stronger than the national government",
-      "The national government can be limited by county governments",
-      "National authority is supreme in conflicts with states",
-      "Courts cannot decide federalism disputes"
-    ],
-    answer: [2]
-  },
-  {
-    id: "GOV_D1_S2_Q06",
-    cs: "CS 8",
-    type: "mc",
-    stimulus: "Police search a person’s home without a warrant or probable cause and use what they find in court.",
-    stem: "Which constitutional protection is most directly at issue?",
-    choices: ["Freedom of assembly","Protection from unreasonable search and seizure","Reserved powers","Right to bear arms"],
-    answer: [1]
-  },
-  {
-    id: "GOV_D1_S2_Q07",
-    cs: "CS 8",
-    type: "multi",
-    stem: "Select TWO protections guaranteed to people accused of crimes.",
-    choices: [
-      "Speedy trial",
-      "Trial by jury",
-      "Unlimited campaign donations",
-      "Power to declare war"
-    ],
-    answer: [0,1]
-  },
-  {
-    id: "GOV_D1_S2_Q08",
-    cs: "CS 9",
-    type: "mc",
-    stimulus: "A state law limits a person’s rights. A court reviews whether the law violates equal protection under the Fourteenth Amendment.",
-    stem: "Why is the Fourteenth Amendment important in this situation?",
-    choices: [
-      "It applies key protections against actions by state governments",
-      "It only restricts local school boards",
-      "It creates the electoral college",
-      "It removes all power from the states"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q09",
-    cs: "CS 11",
-    type: "mc",
-    stimulus: "Congress passes a bill. The president vetoes it. Congress then attempts to override the veto.",
-    stem: "Which principle is best illustrated by this process?",
-    choices: ["Checks and balances","Federalism","Popular sovereignty","Judicial federalism"],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q10",
-    cs: "CS 11",
-    type: "multi",
-    stem: "Select TWO actions that are examples of checks and balances.",
-    choices: [
-      "The president vetoes a bill",
-      "Congress overrides a veto",
-      "A city issues dog licenses",
-      "A state builds a road"
-    ],
-    answer: [0,1]
-  },
-  {
-    id: "GOV_D1_S2_Q11",
-    cs: "CS 13",
-    type: "mc",
-    stimulus: "An organization spends money on ads and lobbying to persuade lawmakers to support stricter environmental rules.",
-    stem: "This organization is best described as",
-    choices: ["A jury","An interest group","A court of appeals","A county recorder"],
-    answer: [1]
-  },
-  {
-    id: "GOV_D1_S2_Q12",
-    cs: "CS 14",
-    type: "mc",
-    stimulus: "A news outlet repeatedly covers one issue, causing it to receive more public attention and political discussion.",
-    stem: "Which role of the media is most clearly shown?",
-    choices: [
-      "Interpreting court decisions",
-      "Setting the public agenda",
-      "Writing constitutional amendments",
-      "Creating administrative rules"
-    ],
-    answer: [1]
-  },
-  {
-    id: "GOV_D1_S2_Q13",
-    cs: "CS 18",
-    type: "mc",
-    stimulus: "A community debates whether the city should increase police funding or spend more on neighborhood programs.",
-    stem: "This debate is best classified as",
-    choices: ["A public policy issue","A judicial review hearing","An amendment ratification","A treaty negotiation"],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q14",
-    cs: "CS 18",
-    type: "partab",
-    stimulus: "Citizens identify a local traffic safety problem, research accident data, discuss possible solutions, and present recommendations at a city council meeting.",
-    stem: "Part A: Which civic skill is most directly demonstrated?",
-    choices: [
-      "Participating in the public policy process",
-      "Declaring a law unconstitutional",
-      "Issuing an executive order",
-      "Ratifying an amendment"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q15",
-    cs: "CS 18",
-    type: "partab",
-    stimulus: "Citizens identify a local traffic safety problem, research accident data, discuss possible solutions, and present recommendations at a city council meeting.",
-    stem: "Part B: Which detail best supports the answer to Part A?",
-    choices: [
-      "They researched evidence and proposed a solution to government officials",
-      "They ignored the issue and waited for courts to act",
-      "They created a treaty with another state",
-      "They appointed federal judges"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q16",
-    cs: "CS 20",
-    type: "multi",
-    stem: "Select TWO examples of expansionary fiscal policy.",
-    choices: [
-      "Increase government spending",
-      "Cut taxes",
-      "Raise reserve requirements",
-      "Sell government bonds through the Federal Reserve"
-    ],
-    answer: [0,1]
-  },
-  {
-    id: "GOV_D1_S2_Q17",
-    cs: "CS 20",
-    type: "mc",
-    stimulus: "Congress cuts taxes during an economic slowdown in an attempt to increase consumer spending and business activity.",
-    stem: "This action is best described as",
-    choices: ["Expansionary fiscal policy","Contractionary monetary policy","Judicial review","Regulatory capture"],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q18",
-    cs: "CS 20",
-    type: "mc",
-    stimulus: "A new government regulation requires factories to install pollution-control equipment. Businesses argue it raises costs, while supporters say it improves public health.",
-    stem: "This example best supports which conclusion about regulation?",
-    choices: [
-      "Regulatory actions can carry both costs and benefits",
-      "Regulation never affects the economy",
-      "Only courts may regulate business",
-      "Regulation always lowers production costs"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q19",
-    cs: "CS 21",
-    type: "mc",
-    stimulus: "The Federal Reserve lowers interest rates and reduces reserve requirements to encourage more lending.",
-    stem: "These actions are best described as",
-    choices: ["Expansionary monetary policy","Contractionary fiscal policy","Judicial activism","State regulation"],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q20",
-    cs: "CS 21",
-    type: "multi",
-    stem: "Select TWO actions the Federal Reserve might take as part of contractionary monetary policy.",
-    choices: [
-      "Raise interest rates",
-      "Raise reserve requirements",
-      "Increase federal spending",
-      "Cut income taxes"
-    ],
-    answer: [0,1]
-  },
-  {
-    id: "GOV_D1_S2_Q21",
-    cs: "CS 21",
-    type: "mc",
-    stimulus: "The Federal Reserve buys government securities in order to put more money into circulation.",
-    stem: "What is the most likely goal of this action?",
-    choices: [
-      "Slow economic activity",
-      "Encourage lending and growth",
-      "Reduce the role of banks by law",
-      "Transfer tax powers to the states"
-    ],
-    answer: [1]
-  },
-  {
-    id: "GOV_D1_S2_Q22",
-    cs: "CS 16",
-    type: "mc",
-    stimulus: "A citizen attends a school board meeting, speaks during the public comment period, and later votes in a local election.",
-    stem: "Which conclusion is best supported by this example?",
-    choices: [
-      "Citizens can participate in state and local government in multiple ways",
-      "Only federal officials can influence policy",
-      "Voting replaces all other civic participation",
-      "School boards are part of the judicial branch"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q23",
-    cs: "CS 17",
-    type: "mc",
-    stimulus: "A resident organizes neighbors to attend a township meeting and advocate for a new stop sign near the community park.",
-    stem: "This action is best an example of",
-    choices: [
-      "Civic engagement within local government structures",
-      "Judicial review",
-      "Federal monetary policy",
-      "Executive privilege"
-    ],
-    answer: [0]
-  },
-  {
-    id: "GOV_D1_S2_Q24",
-    cs: "CS 8",
-    type: "mc",
-    stimulus: "Impoundment is a refusal by the president to spend funds allocated by Congress. In one dispute, courts examined whether the executive branch could ignore spending requirements set by federal law.",
-    stem: "Which constitutional principle is most directly involved in this dispute?",
-    choices: ["Federalism","Checks on executive power","Freedom of religion","Reserved powers to counties"],
-    answer: [1]
-  },
-  {
-    id: "GOV_D1_S2_Q25",
-    cs: "CS 3",
-    type: "mc",
-    stimulus: "A source presents the author’s viewpoint and argues that a public official was right or wrong, using persuasive language rather than neutral reporting.",
-    stem: "Which type of source is being described?",
-    choices: ["Editorial/opinion source","Official record","Scholarly research","Primary law code"],
-    answer: [0]
-  }
+const ATTEMPT_KEY = "GOV_D1_S1_ATTEMPT_LOCK";
+const STORAGE_KEY = "LEGEND_GOV_D1_S1_STATE_V2";
+
+const QUESTION_BANK = [
+  { id:"GOV_D1_S1_Q01", cs:"CS 1", type:"mc", stem:"Which document established the framework for the government of the United States?", choices:["Articles of Confederation","Declaration of Independence","U.S. Constitution","Northwest Ordinance"], answer:[2] },
+  { id:"GOV_D1_S1_Q02", cs:"CS 2", type:"mc", stem:"The idea that government gets its authority from the people is based on", choices:["divine right","social contract theory","judicial review","federal supremacy"], answer:[1] },
+  { id:"GOV_D1_S1_Q03", cs:"CS 3", type:"mc", stem:"A source written mainly to persuade readers toward a point of view is best classified as", choices:["editorial","official record","statistical chart","constitutional clause"], answer:[0] },
+  { id:"GOV_D1_S1_Q04", cs:"CS 4", type:"mc", stem:"Which principle is most directly designed to prevent one branch of government from becoming too powerful?", choices:["checks and balances","federalism","popular sovereignty","judicial federalism"], answer:[0] },
+  { id:"GOV_D1_S1_Q05", cs:"CS 5", type:"mc", stem:"Government gets its authority from the people. Which principle does this describe?", choices:["federalism","popular sovereignty","judicial review","due process"], answer:[1] },
+  { id:"GOV_D1_S1_Q06", cs:"CS 5", type:"mc", stem:"Power divided among legislative, executive, and judicial branches is known as", choices:["separation of powers","incorporation","federalism","reserved powers"], answer:[0] },
+  { id:"GOV_D1_S1_Q07", cs:"CS 5", type:"mc", stem:"A government official may act only within powers allowed by law. This idea reflects", choices:["limited government","popular sovereignty","direct democracy","majority rule"], answer:[0] },
+  { id:"GOV_D1_S1_Q08", cs:"CS 6", type:"mc", stem:"Power shared between state and national governments is called", choices:["federalism","republicanism","incorporation","judicial review"], answer:[0] },
+  { id:"GOV_D1_S1_Q09", cs:"CS 6", type:"mc", stem:"Which level of government is chiefly responsible for conducting foreign policy?", choices:["local","county","state","federal"], answer:[3] },
+  { id:"GOV_D1_S1_Q10", cs:"CS 7", type:"mc", stem:"Marbury v. Madison is most closely associated with", choices:["implied powers","judicial review","executive privilege","reserved powers"], answer:[1] },
+  { id:"GOV_D1_S1_Q11", cs:"CS 7", type:"mc", stem:"McCulloch v. Maryland supported the constitutional idea of", choices:["state nullification","implied powers","term limits","local supremacy"], answer:[1] },
+  { id:"GOV_D1_S1_Q12", cs:"CS 7", type:"mc", stem:"Gibbons v. Ogden expanded national authority over", choices:["interstate commerce","state constitutions","criminal procedure","elections"], answer:[0] },
+  { id:"GOV_D1_S1_Q13", cs:"CS 8", type:"mc", stem:"Which amendment protects freedom of speech?", choices:["First Amendment","Second Amendment","Fourth Amendment","Fifth Amendment"], answer:[0] },
+  { id:"GOV_D1_S1_Q14", cs:"CS 8", type:"mc", stem:"Protection against unreasonable searches and seizures is found in the", choices:["Second Amendment","Fourth Amendment","Fifth Amendment","Eighth Amendment"], answer:[1] },
+  { id:"GOV_D1_S1_Q15", cs:"CS 8", type:"mc", stem:"Protection against self-incrimination is provided by the", choices:["First Amendment","Fourth Amendment","Fifth Amendment","Tenth Amendment"], answer:[2] },
+  { id:"GOV_D1_S1_Q16", cs:"CS 9", type:"mc", stem:"The Fourteenth Amendment is especially important because it extended due process and equal protection against actions by", choices:["foreign governments","state governments","only Congress","private companies"], answer:[1] },
+  { id:"GOV_D1_S1_Q17", cs:"CS 10", type:"mc", stem:"The right to a speedy and public trial is protected by the", choices:["Fourth Amendment","Fifth Amendment","Sixth Amendment","Eighth Amendment"], answer:[2] },
+  { id:"GOV_D1_S1_Q18", cs:"CS 11", type:"mc", stem:"Which branch of government is primarily responsible for carrying out laws?", choices:["legislative","executive","judicial","county"], answer:[1] },
+  { id:"GOV_D1_S1_Q19", cs:"CS 11", type:"mc", stem:"Which branch interprets laws and decides cases?", choices:["executive","legislative","judicial","administrative"], answer:[2] },
+  { id:"GOV_D1_S1_Q20", cs:"CS 12", type:"mc", stem:"A presidential veto is an example of", choices:["popular sovereignty","checks and balances","federalism","incorporation"], answer:[1] },
+  { id:"GOV_D1_S1_Q21", cs:"CS 13", type:"mc", stem:"Political parties most directly help citizens by", choices:["issuing court rulings","selecting candidates and organizing issues","enforcing criminal laws","printing money"], answer:[1] },
+  { id:"GOV_D1_S1_Q22", cs:"CS 14", type:"mc", stem:"An organization that tries to influence public policy on behalf of a cause or group is an", choices:["interest group","electoral college","executive agency","county board"], answer:[0] },
+  { id:"GOV_D1_S1_Q23", cs:"CS 15", type:"mc", stem:"Casting a ballot in an election is an example of", choices:["executive action","civic participation","judicial review","treaty making"], answer:[1] },
+  { id:"GOV_D1_S1_Q24", cs:"CS 16", type:"mc", stem:"Which is an example of local government?", choices:["U.S. Senate","Ohio Supreme Court","city council","state auditor"], answer:[2] },
+  { id:"GOV_D1_S1_Q25", cs:"CS 17", type:"mc", stem:"A citizen attending a town meeting to speak on an issue is an example of", choices:["judicial review","civic engagement","federal supremacy","executive privilege"], answer:[1] },
+  { id:"GOV_D1_S1_Q26", cs:"CS 18", type:"mc", stem:"A debated issue about what government should do is best described as a", choices:["judicial order","public policy issue","reserved power","federal grant"], answer:[1] },
+  { id:"GOV_D1_S1_Q27", cs:"CS 19", type:"mc", stem:"Which institution most directly helps shape public opinion by deciding which issues receive attention?", choices:["media","cabinet","jury","county clerk"], answer:[0] },
+  { id:"GOV_D1_S1_Q28", cs:"CS 20", type:"mc", stem:"When government changes taxes and spending to influence the economy, it is using", choices:["foreign policy","monetary policy","fiscal policy","judicial policy"], answer:[2] },
+  { id:"GOV_D1_S1_Q29", cs:"CS 21", type:"mc", stem:"Which institution manages monetary policy in the United States?", choices:["Congress","Supreme Court","Federal Reserve","Ohio General Assembly"], answer:[2] },
+  { id:"GOV_D1_S1_Q30", cs:"CS 20", type:"mc", stem:"Increasing government spending during an economic slowdown is generally considered", choices:["expansionary fiscal policy","contractionary fiscal policy","judicial activism","federalism"], answer:[0] }
 ];
 
-const STORAGE_KEY = "LEGEND_GOV_D1_S2_STATE";
+function hash32(str){
+  let h = 2166136261 >>> 0;
+  for(let i = 0; i < str.length; i++){
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+function mulberry32(a){
+  return function(){
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function shuffleArray(arr, seedStr){
+  const a = arr.slice();
+  const rand = mulberry32(hash32(seedStr));
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(rand() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
+let QUESTIONS = [];
+
+let state = {
+  studentName: "",
+  startedAt: null,
+  current: 0,
+  answers: [],
+  submitted: false,
+  score: null,
+  attemptNumber: 1,
+  questionOrderSeed: null
+};
+
+function escapeHtml(str){
+  return String(str ?? "").replace(/[&<>"']/g, s => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[s]));
+}
 function nowLocalString(d){
   return new Date(d).toLocaleString();
 }
@@ -334,23 +113,18 @@ function letter(i){
   return ["A","B","C","D","E","F"][i] || "";
 }
 function sameArray(a,b){
-  return Array.isArray(a) && Array.isArray(b) &&
-         a.length === b.length &&
-         a.every((v,i)=>v===b[i]);
+  return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v,i)=>v===b[i]);
 }
-function normalizeMulti(arr){
-  return [...arr].sort((a,b)=>a-b);
+function isCorrect(q, answer){
+  return Array.isArray(answer) && sameArray(answer, q.answer);
 }
-
-let state = {
-  studentName: "",
-  startedAt: null,
-  current: 0,
-  answers: Array(QUESTIONS.length).fill(null),
-  submitted: false,
-  score: null
-};
-
+function buildQuestions(){
+  const seed = state.questionOrderSeed || "default-seed";
+  QUESTIONS = shuffleArray(QUESTION_BANK, seed);
+  if(!Array.isArray(state.answers) || state.answers.length !== QUESTIONS.length){
+    state.answers = Array(QUESTIONS.length).fill(null);
+  }
+}
 function save(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
@@ -372,23 +146,32 @@ function hardRestart(){
 function countAnswered(){
   return state.answers.filter(a => a !== null).length;
 }
-function isCorrect(q, answer){
-  if(q.type === "multi"){
-    return Array.isArray(answer) && sameArray(normalizeMulti(answer), normalizeMulti(q.answer));
-  }
-  return Array.isArray(answer) && sameArray(answer, q.answer);
+function isLocked(){
+  return localStorage.getItem(ATTEMPT_KEY) === "USED";
+}
+function buildLockedScreen(){
+  document.getElementById("app").innerHTML = `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="panel lock-box">
+      <div class="kicker">Attempt Locked</div>
+      <h1>${TEST_META.title}</h1>
+      <p class="sub">This segment has already been completed on this device/browser.</p>
+      <div class="footer-actions">
+        <button onclick="location.href='../index.html'">Back to Hub</button>
+      </div>
+    </div>
+  `;
 }
 function buildIntro(){
-  const app = document.getElementById("app");
-  app.innerHTML = `
+  document.getElementById("app").innerHTML = `
     <a class="back-link" href="../index.html">← Back to Hub</a>
     <div class="panel name-card">
       <div class="kicker">Legend Mastery Series • Government</div>
       <h1>${TEST_META.title}</h1>
-      <p class="sub">25-question OST-style segment. Name is required to begin. Submit when finished.</p>
+      <p class="sub">30-question OST-style segment. Name is required to begin. One attempt only.</p>
       <input id="nameInput" class="input" type="text" maxlength="60" placeholder="Enter your name to begin" />
       <div class="help">
-        Application and reasoning-focused segment. Includes stimulus-based questions, multi-select items, and Part A / Part B style thinking.
+        Recognition-focused segment with broad standards coverage. Questions are shuffled for test realism.
       </div>
       <div class="footer-actions">
         <button id="startBtn">Start Test</button>
@@ -403,6 +186,9 @@ function buildIntro(){
     }
     state.studentName = name;
     state.startedAt = new Date().toISOString();
+    state.attemptNumber = 1;
+    state.questionOrderSeed = `${state.studentName}|${state.startedAt}|${TEST_META.title}`;
+    buildQuestions();
     save();
     renderTest();
   };
@@ -420,6 +206,7 @@ function buildTopbar(){
       </div>
       <div class="topbar-right">
         <span class="pill">Name: ${escapeHtml(state.studentName)}</span>
+        <span class="pill">Attempt: ${state.attemptNumber}</span>
         <span class="pill">Started: ${escapeHtml(nowLocalString(started))}</span>
         <span class="pill">Runtime: <span id="runtimeDisplay">${runtime}</span></span>
       </div>
@@ -438,28 +225,20 @@ function buildTopbar(){
 function renderQuestion(){
   const q = QUESTIONS[state.current];
   const currentAnswer = state.answers[state.current];
-  const multi = q.type === "multi";
-  const app = document.getElementById("app");
-  app.innerHTML = buildTopbar() + `
+  document.getElementById("app").innerHTML = buildTopbar() + `
     <div class="panel question-card">
       <div class="q-type">Question ${state.current + 1} of ${QUESTIONS.length} • ${q.type.toUpperCase()} • ${q.cs}</div>
-      ${q.stimulus ? `<div class="stimulus">${escapeHtml(q.stimulus)}</div>` : ``}
       <div class="q-stem">${escapeHtml(q.stem)}</div>
-      ${multi ? `<p class="multi-note">Select all correct answers, then press Confirm Selection.</p>` : ``}
       <div class="choices">
-        ${q.choices.map((choice, i) => {
-          const selected = Array.isArray(currentAnswer) && currentAnswer.includes(i);
-          return `
-            <button class="choice ${selected ? "selected" : ""}" onclick="${multi ? `toggleMulti(${i})` : `selectSingle(${i})`}">
-              <span class="choice-letter">${letter(i)}.</span> ${escapeHtml(choice)}
-            </button>
-          `;
-        }).join("")}
+        ${q.choices.map((choice, i) => `
+          <button class="choice ${currentAnswer !== null && currentAnswer[0] === i ? "selected" : ""}" onclick="selectChoice(${i})">
+            <span class="choice-letter">${letter(i)}.</span> ${escapeHtml(choice)}
+          </button>
+        `).join("")}
       </div>
       <div class="footer-actions">
         <button class="secondary" ${state.current === 0 ? "disabled" : ""} onclick="prevQuestion()">Previous</button>
         <button class="secondary" onclick="skipQuestion()">Skip</button>
-        ${multi ? `<button onclick="confirmMulti()">Confirm Selection</button>` : ``}
         <button class="warn" onclick="reviewScreen()">Review / Submit</button>
       </div>
     </div>
@@ -470,32 +249,9 @@ function renderTest(){
   if(state.current >= QUESTIONS.length) state.current = QUESTIONS.length - 1;
   renderQuestion();
 }
-function selectSingle(i){
+function selectChoice(i){
   state.answers[state.current] = [i];
   save();
-  if(state.current < QUESTIONS.length - 1){
-    state.current++;
-    save();
-    renderQuestion();
-  }else{
-    reviewScreen();
-  }
-}
-function toggleMulti(i){
-  const current = Array.isArray(state.answers[state.current]) ? [...state.answers[state.current]] : [];
-  const idx = current.indexOf(i);
-  if(idx >= 0) current.splice(idx,1);
-  else current.push(i);
-  state.answers[state.current] = current;
-  save();
-  renderQuestion();
-}
-function confirmMulti(){
-  const current = state.answers[state.current];
-  if(!Array.isArray(current) || current.length === 0){
-    alert("Select at least one answer before confirming.");
-    return;
-  }
   if(state.current < QUESTIONS.length - 1){
     state.current++;
     save();
@@ -520,36 +276,37 @@ function skipQuestion(){
     reviewScreen();
   }
 }
+function jumpToQuestion(idx){
+  state.current = idx;
+  save();
+  renderQuestion();
+}
 function reviewScreen(){
   const answered = countAnswered();
   const unanswered = QUESTIONS.length - answered;
-  const app = document.getElementById("app");
-  app.innerHTML = buildTopbar() + `
+  document.getElementById("app").innerHTML = buildTopbar() + `
     <div class="panel">
       <h2>Review Before Submitting</h2>
       <p class="sub">Answered: ${answered} of ${QUESTIONS.length}. Unanswered: ${unanswered}.</p>
       <div class="review-box">
-        ${QUESTIONS.map((q, idx) => {
-          const ans = state.answers[idx];
-          const answerText = !ans
-            ? "No answer"
-            : q.type === "multi"
-              ? "Answered: " + normalizeMulti(ans).map(v => letter(v)).join(", ")
-              : "Answered: " + letter(ans[0]);
-          return `
-            <div class="review-item">
-              <div class="review-top">
-                <strong>Q${String(idx + 1).padStart(2,"0")}</strong>
-                <span class="tag">${q.cs}</span>
-              </div>
-              <div class="muted">${escapeHtml(q.stem)}</div>
-              <div style="margin-top:8px;"><span class="tag">${answerText}</span></div>
-              <div class="footer-actions">
-                <button class="secondary" onclick="jumpToQuestion(${idx})">Go to Question</button>
-              </div>
+        ${QUESTIONS.map((q, idx) => `
+          <div class="review-item">
+            <div class="review-top">
+              <strong>Q${String(idx + 1).padStart(2,"0")}</strong>
+              <span class="tag">${q.cs}</span>
             </div>
-          `;
-        }).join("")}
+            <div class="muted">${escapeHtml(q.stem)}</div>
+            <div style="margin-top:8px;">
+              ${state.answers[idx] === null
+                ? `<span class="tag">No answer</span>`
+                : `<span class="tag">Answered: ${letter(state.answers[idx][0])}</span>`
+              }
+            </div>
+            <div class="footer-actions">
+              <button class="secondary" onclick="jumpToQuestion(${idx})">Go to Question</button>
+            </div>
+          </div>
+        `).join("")}
       </div>
       <hr class="sep">
       <div class="footer-actions">
@@ -559,13 +316,9 @@ function reviewScreen(){
     </div>
   `;
 }
-function jumpToQuestion(idx){
-  state.current = idx;
-  save();
-  renderQuestion();
-}
 async function submitTest(){
   if(state.submitted) return;
+
   const endedAt = new Date().toISOString();
   const score = QUESTIONS.reduce((sum, q, idx) => sum + (isCorrect(q, state.answers[idx]) ? 1 : 0), 0);
   const accuracy = Math.round((score / QUESTIONS.length) * 100);
@@ -585,6 +338,7 @@ async function submitTest(){
     score,
     total: QUESTIONS.length,
     accuracy,
+    attemptNumber: state.attemptNumber,
     questions: QUESTIONS.map((q, idx) => ({
       id: q.id,
       cs: q.cs,
@@ -602,44 +356,47 @@ async function submitTest(){
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     });
-    await res.text();
+    const text = await res.text();
+    let parsed = {};
+    try{ parsed = JSON.parse(text); }catch(err){}
+    if(parsed && parsed.ok === false){
+      alert(parsed.message || "This test appears to have already been submitted.");
+      localStorage.setItem(ATTEMPT_KEY, "USED");
+      buildLockedScreen();
+      return;
+    }
   }catch(err){
     alert("Submission did not reach the spreadsheet. Check the Apps Script URL and deployment settings, then try again.");
     return;
   }
 
+  localStorage.setItem(ATTEMPT_KEY, "USED");
   state.submitted = true;
   state.score = score;
   save();
 
-  const app = document.getElementById("app");
-  app.innerHTML = `
+  document.getElementById("app").innerHTML = `
     <a class="back-link" href="../index.html">← Back to Hub</a>
     <div class="panel">
       <div class="kicker">Submission Complete</div>
       <h1>${TEST_META.title}</h1>
       <div class="stats">
         <div class="stat"><div class="stat-label">Name</div><div class="stat-value">${escapeHtml(state.studentName)}</div></div>
+        <div class="stat"><div class="stat-label">Attempt</div><div class="stat-value">${state.attemptNumber}</div></div>
         <div class="stat"><div class="stat-label">Date</div><div class="stat-value">${escapeHtml(new Date(endedAt).toLocaleDateString())}</div></div>
         <div class="stat"><div class="stat-label">Start</div><div class="stat-value">${escapeHtml(nowLocalString(state.startedAt))}</div></div>
         <div class="stat"><div class="stat-label">End</div><div class="stat-value">${escapeHtml(nowLocalString(endedAt))}</div></div>
         <div class="stat"><div class="stat-label">Runtime</div><div class="stat-value">${formatRuntime(payload.runtimeSeconds)}</div></div>
         <div class="stat"><div class="stat-label">Score</div><div class="stat-value">${score} / ${QUESTIONS.length}</div></div>
         <div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value">${accuracy}%</div></div>
-        <div class="stat"><div class="stat-label">Result</div><div class="stat-value ${accuracy >= 80 ? "result-mastered" : "result-replay"}">${accuracy >= 80 ? "READY" : "REVIEW"}</div></div>
+        <div class="stat"><div class="stat-label">Result</div><div class="stat-value ${accuracy >= 80 ? "result-ready" : "result-review"}">${accuracy >= 80 ? "READY" : "REVIEW"}</div></div>
       </div>
       <div class="footer-actions">
-        <button class="secondary" onclick="hardRestart()">Take Again</button>
         <button onclick="location.href='../index.html'">Back to Hub</button>
       </div>
     </div>
   `;
   localStorage.removeItem(STORAGE_KEY);
-}
-function escapeHtml(str){
-  return String(str ?? "").replace(/[&<>"']/g, s => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[s]));
 }
 function tick(){
   const el = document.getElementById("runtimeDisplay");
@@ -647,21 +404,25 @@ function tick(){
     el.textContent = formatRuntime((Date.now() - new Date(state.startedAt).getTime()) / 1000);
   }
 }
+
 load();
-if(!state.studentName || !state.startedAt){
+if(isLocked()){
+  buildLockedScreen();
+}else if(!state.studentName || !state.startedAt){
   buildIntro();
 }else{
+  buildQuestions();
   renderTest();
 }
+
 setInterval(tick, 1000);
+
 window.hardRestart = hardRestart;
 window.prevQuestion = prevQuestion;
 window.skipQuestion = skipQuestion;
 window.reviewScreen = reviewScreen;
 window.jumpToQuestion = jumpToQuestion;
-window.selectSingle = selectSingle;
-window.toggleMulti = toggleMulti;
-window.confirmMulti = confirmMulti;
+window.selectChoice = selectChoice;
 window.submitTest = submitTest;
 </script>
 </body>
