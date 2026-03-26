@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Day 3 Segment 1 — Government</title>
+<link rel="stylesheet" href="../styles.css"/>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbw3LxbT3Hm4VMrdZ9V7soijQ_rdOWVoALxAeq7HyAftiTqNmH8zDLUdjfkwhJDo0HY4/exec";
+
+const META={day:"Day 3",segment:"Segment 1",focus:"Recognition + TEI"};
+
+const ATTEMPT_KEY="D3S1_LOCK";
+const STORAGE_KEY="D3S1_STATE";
+const OVERRIDE=new URLSearchParams(location.search).get("unlock")==="legend";
+
+/* ================= QUESTION BANK ================= */
+
+const BANK=[
+
+/* PASSAGE — SKIMMABLE SOURCE TYPE */
+{
+id:"Q1",cs:"CS 3",type:"mc",
+stimulus:`A newspaper editorial argued that Congress should change economic policy, stating that current leadership is failing the people.`,
+stem:"Which type of source is this?",
+choices:["editorial","record","scholarly article","legal transcript"],
+answer:[0]
+},
+
+/* TRUE CONTENT */
+{
+id:"Q2",cs:"CS 5",type:"mc",
+stem:"Government gets its authority from the people. Which principle does this describe?",
+choices:["federalism","popular sovereignty","judicial review","reserved powers"],
+answer:[1]
+},
+
+{
+id:"Q3",cs:"CS 5",type:"dropdown",
+stem:"Dividing power among branches is called [blank].",
+choices:["federalism","checks and balances","separation of powers","incorporation"],
+answer:[2]
+},
+
+{
+id:"Q4",cs:"CS 7",type:"mc",
+stem:"Which case established judicial review?",
+choices:["Marbury v. Madison","Gibbons v. Ogden","McCulloch v. Maryland","Gideon v. Wainwright"],
+answer:[0]
+},
+
+/* CLASSIFICATION TEI */
+{
+id:"Q5",cs:"CS 11",type:"classify",
+stem:"Match each action to the correct branch.",
+categories:["Legislative","Executive","Judicial"],
+items:[
+{label:"interprets laws",cat:2},
+{label:"enforces laws",cat:1},
+{label:"passes laws",cat:0}
+]
+},
+
+/* PASSAGE — SKIMMABLE FEDERALISM */
+{
+id:"Q6",cs:"CS 6",type:"mc",
+stimulus:`A state government challenges a federal law, claiming it has authority over the issue.`,
+stem:"Which principle is being tested?",
+choices:["federalism","due process","popular sovereignty","judicial restraint"],
+answer:[0]
+},
+
+/* MULTI */
+{
+id:"Q7",cs:"CS 10",type:"multi",
+stem:"Select TWO rights of the accused.",
+choices:["speedy trial","jury trial","declare war","appoint judges"],
+answer:[0,1]
+},
+
+/* ECON PASSAGE (your request style) */
+{
+id:"Q8",cs:"CS 21",type:"mc",
+stimulus:`The Federal Reserve lowers interest rates, making borrowing easier for businesses and consumers.`,
+stem:"What is the likely goal?",
+choices:["expand the economy","reduce government power","increase taxes","limit production"],
+answer:[0]
+},
+
+{
+id:"Q9",cs:"CS 20",type:"multi",
+stem:"Select TWO expansionary fiscal policies.",
+choices:["increase spending","cut taxes","raise taxes","cut spending"],
+answer:[0,1]
+},
+
+/* QUICK HIT */
+{
+id:"Q10",cs:"CS 8",type:"mc",
+stem:"Protection against unreasonable searches is found in which amendment?",
+choices:["1st","4th","5th","8th"],
+answer:[1]
+},
+
+/* PASSAGE — EASY SKIP */
+{
+id:"Q11",cs:"CS 13",type:"mc",
+stimulus:`A political party organizes campaigns and promotes candidates across the country.`,
+stem:"What is the main role shown?",
+choices:["selecting candidates","declaring laws unconstitutional","printing money","conducting trials"],
+answer:[0]
+},
+
+/* REST MIXED COVERAGE */
+{
+id:"Q12",cs:"CS 14",type:"mc",
+stem:"Interest groups primarily attempt to",
+choices:["influence policy","interpret law","run elections","enforce laws"],
+answer:[0]
+},
+
+{
+id:"Q13",cs:"CS 15",type:"mc",
+stem:"Voting in an election is an example of",
+choices:["civic participation","judicial review","federalism","executive action"],
+answer:[0]
+},
+
+{
+id:"Q14",cs:"CS 18",type:"mc",
+stem:"A debate over government spending priorities is a",
+choices:["public policy issue","court ruling","constitutional amendment","treaty"],
+answer:[0]
+},
+
+{
+id:"Q15",cs:"CS 19",type:"mc",
+stem:"Media most directly influences government by",
+choices:["setting agenda","declaring laws unconstitutional","voting laws","writing policy"],
+answer:[0]
+}
+
+];
+
+/* ================= SHUFFLE ================= */
+
+function hash32(str){let h=2166136261>>>0;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function rand(seed){let a=hash32(seed);return ()=>{a+=0x6D2B79F5;a=Math.imul(a^a>>>15,a|1);a^=a+Math.imul(a^a>>>7,a|61);return((a^a>>>14)>>>0)/4294967296;};}
+
+function shuffle(arr,seed){
+const r=rand(seed);
+let a=[...arr];
+for(let i=a.length-1;i>0;i--){
+const j=Math.floor(r()* (i+1));
+[a[i],a[j]]=[a[j],a[i]];
+}
+return a;
+}
+
+let state={name:"",i:0,answers:[],start:null};
+
+/* ================= RENDER ================= */
+
+function start(){
+state.name=document.getElementById("n").value;
+if(!state.name) return alert("Enter name");
+state.start=new Date().toISOString();
+state.answers=new Array(BANK.length).fill(null);
+render();
+}
+
+function render(){
+const q=BANK[state.i];
+
+document.getElementById("app").innerHTML=`
+<div class="panel">
+<h2>${META.day} — ${META.segment}</h2>
+<div>${state.name}</div>
+<div>Q ${state.i+1}/${BANK.length}</div>
+
+${q.stimulus?`<div class="stimulus">${q.stimulus}</div>`:""}
+
+<div class="q">${q.stem}</div>
+
+<div>
+${q.choices? q.choices.map((c,i)=>`
+<button onclick="pick(${i})">${c}</button>`).join(""):""}
+</div>
+
+<button onclick="next()">Next</button>
+</div>
+`;
+}
+
+function pick(i){
+state.answers[state.i]=[i];
+}
+
+function next(){
+if(state.i<BANK.length-1){state.i++;render();}
+else submit();
+}
+
+async function submit(){
+await fetch(SCRIPT_URL,{
+method:"POST",
+body:JSON.stringify({name:state.name,answers:state.answers})
+});
+alert("Submitted");
+}
+
+document.getElementById("app").innerHTML=`
+<div class="panel">
+<h1>Day 3 Segment 1</h1>
+<input id="n" placeholder="Enter name"/>
+<button onclick="start()">Start</button>
+</div>
+`;
+</script>
+</body>
+</html>
