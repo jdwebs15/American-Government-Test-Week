@@ -22,7 +22,7 @@ const TEST_META = {
 };
 
 const ATTEMPT_KEY = "GOV_D1_S1_ATTEMPT_LOCK";
-const STORAGE_KEY = "LEGEND_GOV_D1_S1_STATE_V2";
+const STORAGE_KEY = "LEGEND_GOV_D1_S1_STATE_V3";
 const TEACHER_SECRET = "legend";
 const TEACHER_OVERRIDE = new URLSearchParams(location.search).get("unlock") === TEACHER_SECRET;
 
@@ -84,6 +84,34 @@ function shuffleArray(arr, seedStr){
   }
   return a;
 }
+function shuffleIndices(length, seedStr){
+  const arr = Array.from({length}, (_, i) => i);
+  const rand = mulberry32(hash32(seedStr));
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+function remapQuestionChoices(question, seedStr){
+  if(!Array.isArray(question.choices) || question.choices.length < 2) return {...question};
+  const order = shuffleIndices(question.choices.length, seedStr);
+  const newChoices = order.map(i => question.choices[i]);
+  const inverseMap = {};
+  order.forEach((oldIdx, newIdx) => inverseMap[oldIdx] = newIdx);
+
+  let newAnswer = question.answer;
+  if(Array.isArray(question.answer)){
+    newAnswer = question.answer.map(oldIdx => inverseMap[oldIdx]).sort((a,b)=>a-b);
+  }
+
+  return {
+    ...question,
+    choices: newChoices,
+    answer: newAnswer,
+    _choiceOrder: order
+  };
+}
 
 let QUESTIONS = [];
 
@@ -122,7 +150,8 @@ function isCorrect(q, answer){
 }
 function buildQuestions(){
   const seed = state.questionOrderSeed || "default-seed";
-  QUESTIONS = shuffleArray(QUESTION_BANK, seed);
+  QUESTIONS = QUESTION_BANK.map((q, idx) => remapQuestionChoices(q, `${seed}|${q.id || idx}|choices`));
+  QUESTIONS = shuffleArray(QUESTIONS, `${seed}|question-order`);
   if(!Array.isArray(state.answers) || state.answers.length !== QUESTIONS.length){
     state.answers = Array(QUESTIONS.length).fill(null);
   }
@@ -186,7 +215,7 @@ function buildIntro(){
       <p class="sub">30-question OST-style segment. Name is required to begin. One attempt only.</p>
       <input id="nameInput" class="input" type="text" maxlength="60" placeholder="Enter your name to begin" />
       <div class="help">
-        Recognition-focused segment with broad standards coverage. Questions are shuffled for test realism.
+        Recognition-focused segment with broad standards coverage. Questions and answer choices are shuffled for test realism.
       </div>
       <div class="footer-actions">
         ${TEACHER_OVERRIDE ? `<span class="tag">Teacher Override Active</span>` : ``}
@@ -341,7 +370,6 @@ async function submitTest(){
   const accuracy = Math.round((score / QUESTIONS.length) * 100);
 
   const payload = {
-    mode: "submit_test",
     studentName: state.studentName,
     subject: TEST_META.subject,
     week: TEST_META.week,
@@ -356,7 +384,6 @@ async function submitTest(){
     total: QUESTIONS.length,
     accuracy,
     attemptNumber: state.attemptNumber,
-    teacherOverride: TEACHER_OVERRIDE ? TEACHER_SECRET : "",
     questions: QUESTIONS.map((q, idx) => ({
       id: q.id,
       cs: q.cs,
@@ -378,11 +405,7 @@ async function submitTest(){
     let parsed = {};
     try{ parsed = JSON.parse(text); }catch(err){}
     if(parsed && parsed.ok === false){
-      alert(parsed.message || "This test appears to have already been submitted.");
-      if(!TEACHER_OVERRIDE){
-        localStorage.setItem(ATTEMPT_KEY, "USED");
-      }
-      buildLockedScreen();
+      alert(parsed.message || "Submission failed.");
       return;
     }
   }catch(err){
@@ -437,7 +460,6 @@ if(isLocked()){
   buildQuestions();
   renderTest();
 }
-
 setInterval(tick, 1000);
 
 window.hardRestart = hardRestart;
