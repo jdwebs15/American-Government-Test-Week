@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Day 3 Segment 2 — Government</title>
+<link rel="stylesheet" href="../styles.css"/>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbw3LxbT3Hm4VMrdZ9V7soijQ_rdOWVoALxAeq7HyAftiTqNmH8zDLUdjfkwhJDo0HY4/exec";
+
+const BLOCKS=[
+
+/* TRUE PART A/B */
+[
+{
+type:"mc",
+stimulus:`The Supreme Court ruled that states must provide attorneys to defendants who cannot afford one.`,
+stem:"Part A: Which principle is shown?",
+choices:["due process","federalism","checks and balances","popular sovereignty"],
+answer:[0]
+},
+{
+type:"mc",
+stem:"Part B: Which evidence supports this?",
+choices:[
+"Right to legal representation",
+"Right to vote",
+"Right to bear arms",
+"Right to privacy"
+],
+answer:[0]
+}
+],
+
+/* FED ECON DECISION */
+[
+{
+type:"mc",
+stimulus:`The Federal Reserve raises interest rates to slow borrowing.`,
+stem:"Part A: What policy type is this?",
+choices:["contractionary","expansionary","fiscal","legislative"],
+answer:[0]
+},
+{
+type:"mc",
+stem:"Part B: What is the intended effect?",
+choices:[
+"slow economic growth",
+"increase employment",
+"expand economy",
+"increase spending"
+],
+answer:[0]
+}
+],
+
+/* CLASSIC FEDERALISM */
+[
+{
+type:"mc",
+stimulus:`A state law conflicts with a federal law, and courts must decide which applies.`,
+stem:"Part A: Which concept is tested?",
+choices:["federalism","popular sovereignty","judicial review","due process"],
+answer:[0]
+},
+{
+type:"mc",
+stem:"Part B: Why?",
+choices:[
+"power division between levels of government",
+"rights of accused",
+"media influence",
+"economic policy"
+],
+answer:[0]
+}
+]
+
+];
+
+function flatten(){
+return BLOCKS.flat();
+}
+
+let Q=flatten();
+let i=0;
+let answers=[];
+
+function render(){
+let q=Q[i];
+document.getElementById("app").innerHTML=`
+<div class="panel">
+<div>Q ${i+1}/${Q.length}</div>
+
+${q.stimulus?`<div>${q.stimulus}</div>`:""}
+
+<div>${q.stem}</div>
+
+${q.choices.map((c,idx)=>`
+<button onclick="pick(${idx})">${c}</button>
+`).join("")}
+
+</div>
+`;
+}
+
+function pick(x){
+answers[i]=x;
+i++;
+if(i<Q.length) render();
+else submit();
+}
+
+async function submit(){
+await fetch(SCRIPT_URL,{
+method:"POST",
+body:JSON.stringify({answers})
+});
+alert("Submitted");
+}
+
+render();
+</script>
+</body>
+</html>
