@@ -23,6 +23,8 @@ const TEST_META = {
 
 const ATTEMPT_KEY = "GOV_D1_S1_ATTEMPT_LOCK";
 const STORAGE_KEY = "LEGEND_GOV_D1_S1_STATE_V2";
+const TEACHER_SECRET = "legend";
+const TEACHER_OVERRIDE = new URLSearchParams(location.search).get("unlock") === TEACHER_SECRET;
 
 const QUESTION_BANK = [
   { id:"GOV_D1_S1_Q01", cs:"CS 1", type:"mc", stem:"Which document established the framework for the government of the United States?", choices:["Articles of Confederation","Declaration of Independence","U.S. Constitution","Northwest Ordinance"], answer:[2] },
@@ -141,13 +143,20 @@ function load(){
 }
 function hardRestart(){
   localStorage.removeItem(STORAGE_KEY);
+  if(TEACHER_OVERRIDE){
+    localStorage.removeItem(ATTEMPT_KEY);
+  }
   location.reload();
 }
 function countAnswered(){
   return state.answers.filter(a => a !== null).length;
 }
 function isLocked(){
+  if(TEACHER_OVERRIDE) return false;
   return localStorage.getItem(ATTEMPT_KEY) === "USED";
+}
+function teacherBadge(){
+  return TEACHER_OVERRIDE ? `<span class="pill">Teacher Override Active</span>` : ``;
 }
 function buildLockedScreen(){
   document.getElementById("app").innerHTML = `
@@ -157,10 +166,16 @@ function buildLockedScreen(){
       <h1>${TEST_META.title}</h1>
       <p class="sub">This segment has already been completed on this device/browser.</p>
       <div class="footer-actions">
+        ${TEACHER_OVERRIDE ? `<button class="warn" onclick="teacherUnlockNow()">Teacher Unlock This Browser</button>` : ``}
         <button onclick="location.href='../index.html'">Back to Hub</button>
       </div>
     </div>
   `;
+}
+function teacherUnlockNow(){
+  localStorage.removeItem(ATTEMPT_KEY);
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
 }
 function buildIntro(){
   document.getElementById("app").innerHTML = `
@@ -174,6 +189,7 @@ function buildIntro(){
         Recognition-focused segment with broad standards coverage. Questions are shuffled for test realism.
       </div>
       <div class="footer-actions">
+        ${TEACHER_OVERRIDE ? `<span class="tag">Teacher Override Active</span>` : ``}
         <button id="startBtn">Start Test</button>
       </div>
     </div>
@@ -205,6 +221,7 @@ function buildTopbar(){
         <button class="danger" onclick="hardRestart()">Restart Test</button>
       </div>
       <div class="topbar-right">
+        ${teacherBadge()}
         <span class="pill">Name: ${escapeHtml(state.studentName)}</span>
         <span class="pill">Attempt: ${state.attemptNumber}</span>
         <span class="pill">Started: ${escapeHtml(nowLocalString(started))}</span>
@@ -339,6 +356,7 @@ async function submitTest(){
     total: QUESTIONS.length,
     accuracy,
     attemptNumber: state.attemptNumber,
+    teacherOverride: TEACHER_OVERRIDE ? TEACHER_SECRET : "",
     questions: QUESTIONS.map((q, idx) => ({
       id: q.id,
       cs: q.cs,
@@ -361,7 +379,9 @@ async function submitTest(){
     try{ parsed = JSON.parse(text); }catch(err){}
     if(parsed && parsed.ok === false){
       alert(parsed.message || "This test appears to have already been submitted.");
-      localStorage.setItem(ATTEMPT_KEY, "USED");
+      if(!TEACHER_OVERRIDE){
+        localStorage.setItem(ATTEMPT_KEY, "USED");
+      }
       buildLockedScreen();
       return;
     }
@@ -370,7 +390,9 @@ async function submitTest(){
     return;
   }
 
-  localStorage.setItem(ATTEMPT_KEY, "USED");
+  if(!TEACHER_OVERRIDE){
+    localStorage.setItem(ATTEMPT_KEY, "USED");
+  }
   state.submitted = true;
   state.score = score;
   save();
@@ -392,6 +414,7 @@ async function submitTest(){
         <div class="stat"><div class="stat-label">Result</div><div class="stat-value ${accuracy >= 80 ? "result-ready" : "result-review"}">${accuracy >= 80 ? "READY" : "REVIEW"}</div></div>
       </div>
       <div class="footer-actions">
+        ${TEACHER_OVERRIDE ? `<button class="warn" onclick="teacherUnlockNow()">Teacher Unlock Again</button>` : ``}
         <button onclick="location.href='../index.html'">Back to Hub</button>
       </div>
     </div>
@@ -424,6 +447,7 @@ window.reviewScreen = reviewScreen;
 window.jumpToQuestion = jumpToQuestion;
 window.selectChoice = selectChoice;
 window.submitTest = submitTest;
+window.teacherUnlockNow = teacherUnlockNow;
 </script>
 </body>
 </html>
