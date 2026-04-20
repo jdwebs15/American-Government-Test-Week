@@ -1,1 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Government Test Week — Period 4 Foundation Segment 1</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="wrap" id="app"></div>
 
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3LxbT3Hm4VMrdZ9V7soijQ_rdOWVoALxAeq7HyAftiTqNmH8zDLUdjfkwhJDo0HY4/exec";
+
+const TEST_META = {
+  subject: "Government",
+  week: "Test Week",
+  day: "Day 2",
+  segment: "Segment 1",
+  title: "Government Test Week — Period 4 Foundation Segment 1",
+  focus: "Foundation Recognition"
+};
+
+const ATTEMPT_KEY = "GOV_D2_FOUNDATION_S1_ATTEMPT_LOCK_P4";
+const STORAGE_KEY = "LEGEND_GOV_D2_FOUNDATION_S1_STATE_V1_P4";
+const TEACHER_SECRET = "legend";
+const TEACHER_OVERRIDE = new URLSearchParams(location.search).get("unlock") === TEACHER_SECRET;
+
+const QUESTION_BANK = [{"id": "GOV_D2_FND_S1_Q01", "cs": "CS 2", "type": "mc", "stem": "The idea that government exists because the people agree to be governed is called", "choices": ["social contract theory", "judicial review", "federal supremacy", "executive privilege"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q02", "cs": "CS 2", "type": "mc", "stem": "If citizens can replace leaders through voting, that best supports the idea of", "choices": ["popular sovereignty", "implied powers", "reserved powers", "judicial restraint"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q03", "cs": "CS 6", "type": "mc", "stem": "Power shared between the national government and state governments is called", "choices": ["federalism", "incorporation", "due process", "judicial review"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q04", "cs": "CS 6", "type": "mc", "stem": "Which level of government is most responsible for treaties and foreign policy?", "choices": ["city", "county", "state", "federal"], "answer": [3]}, {"id": "GOV_D2_FND_S1_Q05", "cs": "CS 7", "type": "mc", "stem": "Marbury v. Madison established the idea of", "choices": ["judicial review", "term limits", "federal grants", "popular sovereignty"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q06", "cs": "CS 7", "type": "mc", "stem": "McCulloch v. Maryland is most closely tied to", "choices": ["implied powers", "state nullification", "jury trials", "direct democracy"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q07", "cs": "CS 7", "type": "mc", "stem": "Gibbons v. Ogden increased national power over", "choices": ["interstate commerce", "local zoning", "jury service", "state constitutions"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q08", "cs": "CS 11", "type": "mc", "stem": "Which branch carries out laws?", "choices": ["legislative", "executive", "judicial", "county"], "answer": [1]}, {"id": "GOV_D2_FND_S1_Q09", "cs": "CS 11", "type": "mc", "stem": "Which branch interprets laws and decides cases?", "choices": ["executive", "legislative", "judicial", "cabinet"], "answer": [2]}, {"id": "GOV_D2_FND_S1_Q10", "cs": "CS 12", "type": "mc", "stem": "A presidential veto is an example of", "choices": ["checks and balances", "popular sovereignty", "federalism", "limited government"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q11", "cs": "CS 21", "type": "mc", "stem": "Which institution controls monetary policy in the United States?", "choices": ["Congress", "Supreme Court", "Federal Reserve", "state legislature"], "answer": [2]}, {"id": "GOV_D2_FND_S1_Q12", "cs": "CS 21", "type": "mc", "stem": "When the Federal Reserve lowers interest rates, it is usually trying to", "choices": ["encourage borrowing", "reduce voting", "raise taxes", "expand state power"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q13", "cs": "CS 21", "type": "mc", "stem": "Raising reserve requirements would most likely", "choices": ["slow lending", "increase free speech", "expand checks and balances", "reduce the number of courts"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q14", "cs": "CS 20", "type": "mc", "stem": "If Congress increases government spending during a slowdown, it is using", "choices": ["expansionary fiscal policy", "contractionary monetary policy", "judicial review", "federalism"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q15", "cs": "CS 20", "type": "mc", "stem": "Cutting taxes to boost the economy is usually called", "choices": ["expansionary fiscal policy", "contractionary fiscal policy", "executive privilege", "judicial restraint"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q16", "cs": "CS 5", "type": "mc", "stem": "Dividing government power among three branches is called", "choices": ["separation of powers", "incorporation", "federalism", "due process"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q17", "cs": "CS 5", "type": "mc", "stem": "Government getting its power from the people is called", "choices": ["popular sovereignty", "judicial review", "federal supremacy", "executive power"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q18", "cs": "CS 8", "type": "mc", "stem": "Freedom of speech is protected by the", "choices": ["First Amendment", "Second Amendment", "Fourth Amendment", "Tenth Amendment"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q19", "cs": "CS 8", "type": "mc", "stem": "Protection from unreasonable searches and seizures is found in the", "choices": ["First Amendment", "Fourth Amendment", "Fifth Amendment", "Sixth Amendment"], "answer": [1]}, {"id": "GOV_D2_FND_S1_Q20", "cs": "CS 9", "type": "mc", "stem": "The Fourteenth Amendment is important because it applied due process and equal protection to", "choices": ["state governments", "foreign nations", "private clubs only", "county fairs"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q21", "cs": "CS 18", "type": "mc", "stem": "A debate about what government should do about school funding is a", "choices": ["public policy issue", "treaty conflict", "judicial veto", "federal grant"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q22", "cs": "CS 19", "type": "mc", "stem": "Which institution most directly helps shape public opinion by deciding what gets attention?", "choices": ["media", "cabinet", "jury", "county clerk"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q23", "cs": "CS 13", "type": "mc", "stem": "Political parties help citizens most directly by", "choices": ["nominating candidates", "declaring laws unconstitutional", "setting interest rates", "conducting censuses"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q24", "cs": "CS 14", "type": "mc", "stem": "A group that tries to influence public policy for a cause is an", "choices": ["interest group", "electoral college", "executive agency", "court of appeals"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q25", "cs": "CS 15", "type": "mc", "stem": "Voting in an election is an example of", "choices": ["civic participation", "judicial review", "executive power", "federal supremacy"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q26", "cs": "CS 16", "type": "mc", "stem": "Which is an example of local government?", "choices": ["U.S. Senate", "city council", "Supreme Court", "state auditor"], "answer": [1]}, {"id": "GOV_D2_FND_S1_Q27", "cs": "CS 17", "type": "mc", "stem": "Speaking at a town meeting is an example of", "choices": ["civic engagement", "monetary policy", "judicial review", "executive privilege"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q28", "cs": "CS 4", "type": "mc", "stem": "Which principle helps prevent one branch from becoming too powerful?", "choices": ["checks and balances", "federalism", "social contract", "incorporation"], "answer": [0]}, {"id": "GOV_D2_FND_S1_Q29", "cs": "CS 1", "type": "mc", "stem": "Which document created the current framework of the U.S. government?", "choices": ["Articles of Confederation", "Declaration of Independence", "U.S. Constitution", "Mayflower Compact"], "answer": [2]}, {"id": "GOV_D2_FND_S1_Q30", "cs": "CS 3", "type": "mc", "stem": "A source written mainly to persuade readers is best described as an", "choices": ["editorial", "court opinion", "chart", "constitution"], "answer": [0]}];
+
+function hash32(str){
+  let h = 2166136261 >>> 0;
+  for(let i = 0; i < str.length; i++){
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+function mulberry32(a){
+  return function(){
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function shuffleArray(arr, seedStr){
+  const a = arr.slice();
+  const rand = mulberry32(hash32(seedStr));
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(rand() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function shuffleIndices(length, seedStr){
+  const arr = Array.from({length}, (_, i) => i);
+  const rand = mulberry32(hash32(seedStr));
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+function remapQuestionChoices(question, seedStr){
+  if(!Array.isArray(question.choices) || question.choices.length < 2) return {...question};
+  const order = shuffleIndices(question.choices.length, seedStr);
+  const newChoices = order.map(i => question.choices[i]);
+  const inverseMap = {};
+  order.forEach((oldIdx, newIdx) => inverseMap[oldIdx] = newIdx);
+
+  let newAnswer = question.answer;
+  if(Array.isArray(question.answer)){
+    newAnswer = question.answer.map(oldIdx => inverseMap[oldIdx]).sort((a,b)=>a-b);
+  }
+
+  return {
+    ...question,
+    choices: newChoices,
+    answer: newAnswer,
+    _choiceOrder: order
+  };
+}
+
+let QUESTIONS = [];
+
+let state = {
+  studentName: "",
+  startedAt: null,
+  current: 0,
+  answers: [],
+  submitted: false,
+  score: null,
+  attemptNumber: 1,
+  questionOrderSeed: null
+};
+
+function escapeHtml(str){
+  return String(str ?? "").replace(/[&<>"']/g, s => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[s]));
+}
+function nowLocalString(d){
+  return new Date(d).toLocaleString();
+}
+function formatRuntime(seconds){
+  const m = Math.floor(seconds / 60).toString().padStart(2,"0");
+  const s = Math.floor(seconds % 60).toString().padStart(2,"0");
+  return `${m}:${s}`;
+}
+function letter(i){
+  return ["A","B","C","D","E","F"][i] || "";
+}
+function sameArray(a,b){
+  return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v,i)=>v===b[i]);
+}
+function isCorrect(q, answer){
+  return Array.isArray(answer) && sameArray(answer, q.answer);
+}
+function buildQuestions(){
+  const seed = state.questionOrderSeed || "default-seed";
+  QUESTIONS = QUESTION_BANK.map((q, idx) => remapQuestionChoices(q, `${seed}|${q.id || idx}|choices`));
+  QUESTIONS = shuffleArray(QUESTIONS, `${seed}|question-order`);
+  if(!Array.isArray(state.answers) || state.answers.length !== QUESTIONS.length){
+    state.answers = Array(QUESTIONS.length).fill(null);
+  }
+}
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed && !parsed.submitted){
+        state = parsed;
+      }
+    }
+  }catch(err){}
+}
+function hardRestart(){
+  localStorage.removeItem(STORAGE_KEY);
+  if(TEACHER_OVERRIDE){
+    localStorage.removeItem(ATTEMPT_KEY);
+  }
+  location.reload();
+}
+function countAnswered(){
+  return state.answers.filter(a => a !== null).length;
+}
+function isLocked(){
+  if(TEACHER_OVERRIDE) return false;
+  return localStorage.getItem(ATTEMPT_KEY) === "USED";
+}
+function teacherBadge(){
+  return TEACHER_OVERRIDE ? `<span class="pill">Teacher Override Active</span>` : ``;
+}
+function buildLockedScreen(){
+  document.getElementById("app").innerHTML = `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="panel lock-box">
+      <div class="kicker">Attempt Locked</div>
+      <h1>${TEST_META.title}</h1>
+      <p class="sub">This segment has already been completed on this device/browser.</p>
+      <div class="footer-actions">
+        ${TEACHER_OVERRIDE ? `<button class="warn" onclick="teacherUnlockNow()">Teacher Unlock This Browser</button>` : ``}
+        <button onclick="location.href='../index.html'">Back to Hub</button>
+      </div>
+    </div>
+  `;
+}
+function teacherUnlockNow(){
+  localStorage.removeItem(ATTEMPT_KEY);
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+function buildIntro(){
+  document.getElementById("app").innerHTML = `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="panel name-card">
+      <div class="kicker">Legend Mastery Series • Government</div>
+      <h1>${TEST_META.title}</h1>
+      <p class="sub">30-question OST-style segment. Name is required to begin. One attempt only.</p>
+      <input id="nameInput" class="input" type="text" maxlength="60" placeholder="Enter your name to begin" />
+      <div class="help">
+        Foundation Recognition-focused Day 2 segment for targeted reteaching and OST-style recognition practice.
+      </div>
+      <div class="footer-actions">
+        ${TEACHER_OVERRIDE ? `<span class="tag">Teacher Override Active</span>` : ``}
+        <button id="startBtn">Start Test</button>
+      </div>
+    </div>
+  `;
+  document.getElementById("startBtn").onclick = () => {
+    const name = document.getElementById("nameInput").value.trim();
+    if(!name){
+      alert("Enter your name to begin.");
+      return;
+    }
+    state.studentName = name;
+    state.startedAt = new Date().toISOString();
+    state.attemptNumber = 1;
+    state.questionOrderSeed = `${state.studentName}|${state.startedAt}|${TEST_META.title}`;
+    buildQuestions();
+    save();
+    renderTest();
+  };
+}
+function buildTopbar(){
+  const started = new Date(state.startedAt);
+  const runtime = formatRuntime((Date.now() - started.getTime()) / 1000);
+  const answered = countAnswered();
+  const progressPct = Math.round((answered / QUESTIONS.length) * 100);
+  return `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="danger" onclick="hardRestart()">Restart Test</button>
+      </div>
+      <div class="topbar-right">
+        ${teacherBadge()}
+        <span class="pill">Name: ${escapeHtml(state.studentName)}</span>
+        <span class="pill">Attempt: ${state.attemptNumber}</span>
+        <span class="pill">Started: ${escapeHtml(nowLocalString(started))}</span>
+        <span class="pill">Runtime: <span id="runtimeDisplay">${runtime}</span></span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Test</div><div class="stat-value">${TEST_META.day} ${TEST_META.segment}</div></div>
+        <div class="stat"><div class="stat-label">Focus</div><div class="stat-value">${TEST_META.focus}</div></div>
+        <div class="stat"><div class="stat-label">Progress</div><div class="stat-value">${answered} / ${QUESTIONS.length}</div></div>
+        <div class="stat"><div class="stat-label">Completion</div><div class="stat-value">${progressPct}%</div></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" style="width:${progressPct}%"></div></div>
+    </div>
+  `;
+}
+function renderQuestion(){
+  const q = QUESTIONS[state.current];
+  const currentAnswer = state.answers[state.current];
+  document.getElementById("app").innerHTML = buildTopbar() + `
+    <div class="panel question-card">
+      <div class="q-type">Question ${state.current + 1} of ${QUESTIONS.length} • ${q.type.toUpperCase()} • ${q.cs}</div>
+      <div class="q-stem">${escapeHtml(q.stem)}</div>
+      <div class="choices">
+        ${q.choices.map((choice, i) => `
+          <button class="choice ${currentAnswer !== null && currentAnswer[0] === i ? "selected" : ""}" onclick="selectChoice(${i})">
+            <span class="choice-letter">${letter(i)}.</span> ${escapeHtml(choice)}
+          </button>
+        `).join("")}
+      </div>
+      <div class="footer-actions">
+        <button class="secondary" ${state.current === 0 ? "disabled" : ""} onclick="prevQuestion()">Previous</button>
+        <button class="secondary" onclick="skipQuestion()">Skip</button>
+        <button class="warn" onclick="reviewScreen()">Review / Submit</button>
+      </div>
+    </div>
+  `;
+}
+function renderTest(){
+  if(state.current < 0) state.current = 0;
+  if(state.current >= QUESTIONS.length) state.current = QUESTIONS.length - 1;
+  renderQuestion();
+}
+function selectChoice(i){
+  state.answers[state.current] = [i];
+  save();
+  if(state.current < QUESTIONS.length - 1){
+    state.current++;
+    save();
+    renderQuestion();
+  }else{
+    reviewScreen();
+  }
+}
+function prevQuestion(){
+  if(state.current > 0){
+    state.current--;
+    save();
+    renderQuestion();
+  }
+}
+function skipQuestion(){
+  if(state.current < QUESTIONS.length - 1){
+    state.current++;
+    save();
+    renderQuestion();
+  }else{
+    reviewScreen();
+  }
+}
+function jumpToQuestion(idx){
+  state.current = idx;
+  save();
+  renderQuestion();
+}
+function reviewScreen(){
+  const answered = countAnswered();
+  const unanswered = QUESTIONS.length - answered;
+  document.getElementById("app").innerHTML = buildTopbar() + `
+    <div class="panel">
+      <h2>Review Before Submitting</h2>
+      <p class="sub">Answered: ${answered} of ${QUESTIONS.length}. Unanswered: ${unanswered}.</p>
+      <div class="review-box">
+        ${QUESTIONS.map((q, idx) => `
+          <div class="review-item">
+            <div class="review-top">
+              <strong>Q${String(idx + 1).padStart(2,"0")}</strong>
+              <span class="tag">${q.cs}</span>
+            </div>
+            <div class="muted">${escapeHtml(q.stem)}</div>
+            <div style="margin-top:8px;">
+              ${state.answers[idx] === null
+                ? `<span class="tag">No answer</span>`
+                : `<span class="tag">Answered: ${letter(state.answers[idx][0])}</span>`
+              }
+            </div>
+            <div class="footer-actions">
+              <button class="secondary" onclick="jumpToQuestion(${idx})">Go to Question</button>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+      <hr class="sep">
+      <div class="footer-actions">
+        <button class="secondary" onclick="renderQuestion()">Back to Test</button>
+        <button onclick="submitTest()">Submit Segment</button>
+      </div>
+    </div>
+  `;
+}
+async function submitTest(){
+  if(state.submitted) return;
+
+  const endedAt = new Date().toISOString();
+  const score = QUESTIONS.reduce((sum, q, idx) => sum + (isCorrect(q, state.answers[idx]) ? 1 : 0), 0);
+  const accuracy = Math.round((score / QUESTIONS.length) * 100);
+
+  const payload = {
+    studentName: state.studentName,
+    subject: TEST_META.subject,
+    week: TEST_META.week,
+    day: TEST_META.day,
+    segment: TEST_META.segment,
+    title: TEST_META.title,
+    focus: TEST_META.focus,
+    startedAt: state.startedAt,
+    endedAt,
+    runtimeSeconds: Math.round((new Date(endedAt) - new Date(state.startedAt)) / 1000),
+    score,
+    total: QUESTIONS.length,
+    accuracy,
+    attemptNumber: state.attemptNumber,
+    questions: QUESTIONS.map((q, idx) => ({
+      id: q.id,
+      cs: q.cs,
+      type: q.type,
+      stem: q.stem,
+      correctAnswer: q.answer,
+      studentAnswer: state.answers[idx],
+      correct: isCorrect(q, state.answers[idx]) ? 1 : 0
+    }))
+  };
+
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    const text = await res.text();
+    let parsed = {};
+    try{ parsed = JSON.parse(text); }catch(err){}
+    if(parsed && parsed.ok === false){
+      alert(parsed.message || "Submission failed.");
+      return;
+    }
+  }catch(err){
+    alert("Submission did not reach the spreadsheet. Check the Apps Script URL and deployment settings, then try again.");
+    return;
+  }
+
+  if(!TEACHER_OVERRIDE){
+    localStorage.setItem(ATTEMPT_KEY, "USED");
+  }
+  state.submitted = true;
+  state.score = score;
+  save();
+
+  document.getElementById("app").innerHTML = `
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+    <div class="panel">
+      <div class="kicker">Submission Complete</div>
+      <h1>${TEST_META.title}</h1>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Name</div><div class="stat-value">${escapeHtml(state.studentName)}</div></div>
+        <div class="stat"><div class="stat-label">Attempt</div><div class="stat-value">${state.attemptNumber}</div></div>
+        <div class="stat"><div class="stat-label">Date</div><div class="stat-value">${escapeHtml(new Date(endedAt).toLocaleDateString())}</div></div>
+        <div class="stat"><div class="stat-label">Start</div><div class="stat-value">${escapeHtml(nowLocalString(state.startedAt))}</div></div>
+        <div class="stat"><div class="stat-label">End</div><div class="stat-value">${escapeHtml(nowLocalString(endedAt))}</div></div>
+        <div class="stat"><div class="stat-label">Runtime</div><div class="stat-value">${formatRuntime(payload.runtimeSeconds)}</div></div>
+        <div class="stat"><div class="stat-label">Score</div><div class="stat-value">${score} / ${QUESTIONS.length}</div></div>
+        <div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value">${accuracy}%</div></div>
+        <div class="stat"><div class="stat-label">Result</div><div class="stat-value ${accuracy >= 80 ? "result-ready" : "result-review"}">${accuracy >= 80 ? "READY" : "REVIEW"}</div></div>
+      </div>
+      <div class="footer-actions">
+        ${TEACHER_OVERRIDE ? `<button class="warn" onclick="teacherUnlockNow()">Teacher Unlock Again</button>` : ``}
+        <button onclick="location.href='../index.html'">Back to Hub</button>
+      </div>
+    </div>
+  `;
+  localStorage.removeItem(STORAGE_KEY);
+}
+function tick(){
+  const el = document.getElementById("runtimeDisplay");
+  if(el && state.startedAt){
+    el.textContent = formatRuntime((Date.now() - new Date(state.startedAt).getTime()) / 1000);
+  }
+}
+
+load();
+if(isLocked()){
+  buildLockedScreen();
+}else if(!state.studentName || !state.startedAt){
+  buildIntro();
+}else{
+  buildQuestions();
+  renderTest();
+}
+setInterval(tick, 1000);
+
+window.hardRestart = hardRestart;
+window.prevQuestion = prevQuestion;
+window.skipQuestion = skipQuestion;
+window.reviewScreen = reviewScreen;
+window.jumpToQuestion = jumpToQuestion;
+window.selectChoice = selectChoice;
+window.submitTest = submitTest;
+window.teacherUnlockNow = teacherUnlockNow;
+</script>
+</body>
+</html>
