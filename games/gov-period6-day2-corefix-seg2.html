@@ -1,1 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Government Test Week — Period 6 Group 2 Core Fix Segment 2</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="wrap" id="app"></div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3LxbT3Hm4VMrdZ9V7soijQ_rdOWVoALxAeq7HyAftiTqNmH8zDLUdjfkwhJDo0HY4/exec";
+
+const TEST_META = {
+  subject: "Government",
+  week: "Test Week",
+  day: "Day 2",
+  segment: "Segment 2",
+  title: "Government Test Week — Period 6 Group 2 Core Fix Segment 2",
+  focus: "Core Fix Application and Causation"
+};
+
+const ATTEMPT_KEY = "GOV_P6_D2_CORE_S2_ATTEMPT_LOCK";
+const STORAGE_KEY = "LEGEND_GOV_P6_D2_CORE_S2_STATE_V1";
+const TEACHER_SECRET = "legend";
+const TEACHER_OVERRIDE = new URLSearchParams(location.search).get("unlock") === TEACHER_SECRET;
+
+const QUESTION_BLOCKS = [[{"id": "P6CFS2_Q01", "cs": "CS 2", "type": "partab", "stimulus": "A speaker says, 'Government is legitimate only because the people allow it to govern.'", "stem": "Part A: Which idea is the speaker describing?", "choices": ["social contract theory", "judicial review", "federal supremacy", "executive privilege"], "answer": [0]}, {"id": "P6CFS2_Q02", "cs": "CS 2", "type": "partab", "stimulus": "A speaker says, 'Government is legitimate only because the people allow it to govern.'", "stem": "Part B: Which example best supports that idea?", "choices": ["Citizens can replace leaders through elections", "Courts can overturn laws", "Congress can regulate commerce", "The president appoints judges"], "answer": [0]}], [{"id": "P6CFS2_Q03", "cs": "CS 6", "type": "partab", "stimulus": "A state passes a law that conflicts with a federal law on interstate trucking.", "stem": "Part A: Which level of government has the stronger claim?", "choices": ["federal government", "state government", "county government", "school board"], "answer": [0]}, {"id": "P6CFS2_Q04", "cs": "CS 6", "type": "partab", "stimulus": "A state passes a law that conflicts with a federal law on interstate trucking.", "stem": "Part B: Why is that answer best supported?", "choices": ["The issue involves interstate commerce", "The issue involves a local park", "The issue involves private club membership", "The issue involves lunch rules"], "answer": [0]}], [{"id": "P6CFS2_Q05", "cs": "CS 7", "type": "mc", "stimulus": "The Supreme Court declares a law unconstitutional.", "stem": "Which principle is being used?", "choices": ["judicial review", "term limits", "reserved powers", "popular sovereignty"], "answer": [0]}], [{"id": "P6CFS2_Q06", "cs": "CS 7", "type": "mc", "stimulus": "Congress creates a national bank, even though that power is not written word for word in the Constitution.", "stem": "Which constitutional idea supports this action?", "choices": ["implied powers", "state nullification", "jury review", "local control"], "answer": [0]}], [{"id": "P6CFS2_Q07", "cs": "CS 20", "type": "mc", "stimulus": "Congress raises spending and cuts taxes during a downturn.", "stem": "What is the most likely goal?", "choices": ["stimulate the economy", "reduce borrowing immediately", "limit media influence", "expand state power"], "answer": [0]}], [{"id": "P6CFS2_Q08", "cs": "CS 20", "type": "multi", "stem": "Select TWO examples of contractionary fiscal policy.", "choices": ["cut government spending", "raise taxes", "buy government securities", "lower reserve requirements"], "answer": [0, 1]}], [{"id": "P6CFS2_Q09", "cs": "CS 11", "type": "mc", "stimulus": "The president signs an executive order directing agencies how to enforce a law.", "stem": "Which branch is acting?", "choices": ["executive", "judicial", "legislative", "local"], "answer": [0]}], [{"id": "P6CFS2_Q10", "cs": "CS 11", "type": "partab", "stimulus": "Congress holds hearings about how a federal agency carried out a law.", "stem": "Part A: Which branch is checking the agency?", "choices": ["legislative branch", "judicial branch", "executive branch", "state branch"], "answer": [0]}, {"id": "P6CFS2_Q11", "cs": "CS 11", "type": "partab", "stimulus": "Congress holds hearings about how a federal agency carried out a law.", "stem": "Part B: Which idea best explains this action?", "choices": ["Legislative oversight checks executive action", "State governments control federal agencies", "Courts must approve all hearings", "Local governments enforce federal budgets"], "answer": [0]}], [{"id": "P6CFS2_Q12", "cs": "CS 21", "type": "mc", "stimulus": "The Federal Reserve lowers the discount rate.", "stem": "What is the most likely effect?", "choices": ["Banks are encouraged to borrow more and lend more", "Government spending automatically falls", "Taxes immediately rise", "State legislatures gain more power"], "answer": [0]}], [{"id": "P6CFS2_Q13", "cs": "CS 21", "type": "multi", "stem": "Select TWO expansionary monetary policy actions.", "choices": ["buy government securities", "lower interest rates", "raise reserve requirements", "sell government securities"], "answer": [0, 1]}], [{"id": "P6CFS2_Q14", "cs": "CS 1", "type": "mc", "stimulus": "Under the Articles of Confederation, the national government had trouble raising money and enforcing laws.", "stem": "Which conclusion is best supported?", "choices": ["The Articles created a weak national government", "The Articles created an overly strong president", "The Articles gave courts too much power", "The Articles abolished state governments"], "answer": [0]}], [{"id": "P6CFS2_Q15", "cs": "CS 4", "type": "mc", "stimulus": "The president vetoes a bill passed by Congress.", "stem": "This action is an example of", "choices": ["checks and balances", "federalism", "popular sovereignty", "reserved powers"], "answer": [0]}], [{"id": "P6CFS2_Q16", "cs": "CS 4", "type": "partab", "stimulus": "The Senate rejects a president's nominee for a major office.", "stem": "Part A: What principle is shown?", "choices": ["checks and balances", "judicial review", "federalism", "direct democracy"], "answer": [0]}, {"id": "P6CFS2_Q17", "cs": "CS 4", "type": "partab", "stimulus": "The Senate rejects a president's nominee for a major office.", "stem": "Part B: Which detail best supports the answer?", "choices": ["One branch is limiting another branch", "The people are voting directly on a law", "States are sharing power with the nation", "A court is deciding a criminal case"], "answer": [0]}], [{"id": "P6CFS2_Q18", "cs": "CS 3", "type": "mc", "stimulus": "A source uses emotional language and recommends how readers should vote.", "stem": "Which type of source is being described?", "choices": ["editorial", "census table", "constitutional clause", "court transcript"], "answer": [0]}], [{"id": "P6CFS2_Q19", "cs": "CS 3", "type": "mc", "stimulus": "A statistical chart and an editorial both discuss unemployment.", "stem": "Which source is more likely to contain opinion?", "choices": ["editorial", "statistical chart", "both equally", "neither ever"], "answer": [0]}], [{"id": "P6CFS2_Q20", "cs": "CS 9", "type": "mc", "stimulus": "A state policy is challenged because it treats one group unfairly under the law.", "stem": "Which amendment is most directly involved?", "choices": ["Fourteenth Amendment", "Third Amendment", "Seventh Amendment", "Tenth Amendment"], "answer": [0]}], [{"id": "P6CFS2_Q21", "cs": "CS 6", "type": "mc", "stimulus": "Congress sets rules for trade crossing state borders.", "stem": "Which constitutional power is being used?", "choices": ["power to regulate interstate commerce", "power to create local zoning rules", "power to license drivers", "power to run school boards"], "answer": [0]}], [{"id": "P6CFS2_Q22", "cs": "CS 20", "type": "mc", "stimulus": "A regulation requires more pollution controls, increasing business costs but improving public health.", "stem": "Which conclusion is best supported?", "choices": ["Regulatory policy often involves tradeoffs", "Regulations never produce benefits", "Businesses always support more regulation", "Courts create all regulations"], "answer": [0]}], [{"id": "P6CFS2_Q23", "cs": "CS 21", "type": "mc", "stimulus": "The Federal Reserve raises reserve requirements.", "stem": "What is the most likely result?", "choices": ["Banks will lend less money", "Congress will spend more money", "Voters will participate more", "State taxes will fall"], "answer": [0]}], [{"id": "P6CFS2_Q24", "cs": "CS 1", "type": "partab", "stimulus": "Delegates at the Constitutional Convention wanted to fix weaknesses in the Articles of Confederation.", "stem": "Part A: What weakness was most important?", "choices": ["The national government lacked sufficient power", "The presidency was too strong", "States had no local control", "Courts had too much authority"], "answer": [0]}, {"id": "P6CFS2_Q25", "cs": "CS 1", "type": "partab", "stimulus": "Delegates at the Constitutional Convention wanted to fix weaknesses in the Articles of Confederation.", "stem": "Part B: Which detail best supports the answer to Part A?", "choices": ["The national government struggled to raise revenue and enforce decisions", "The president vetoed too many laws", "The Supreme Court kept striking down amendments", "Cities controlled foreign policy"], "answer": [0]}], [{"id": "P6CFS2_Q26", "cs": "CS 11", "type": "mc", "stimulus": "A court hears a case about whether a law violates the Constitution.", "stem": "Which branch is acting?", "choices": ["judicial", "executive", "legislative", "county"], "answer": [0]}], [{"id": "P6CFS2_Q27", "cs": "CS 20", "type": "mc", "stimulus": "Congress cuts spending and raises taxes when inflation is high.", "stem": "This is best described as", "choices": ["contractionary fiscal policy", "expansionary fiscal policy", "expansionary monetary policy", "popular sovereignty"], "answer": [0]}], [{"id": "P6CFS2_Q28", "cs": "CS 7", "type": "mc", "stimulus": "A state tries to tax a valid federal institution.", "stem": "Which case most directly suggests the state action should fail?", "choices": ["McCulloch v. Maryland", "Marbury v. Madison", "Gideon v. Wainwright", "Tinker v. Des Moines"], "answer": [0]}], [{"id": "P6CFS2_Q29", "cs": "CS 21", "type": "mc", "stimulus": "The Federal Reserve sells government securities.", "stem": "What is the most likely purpose?", "choices": ["reduce money available for lending", "increase government spending", "expand equal protection", "strengthen local government"], "answer": [0]}], [{"id": "P6CFS2_Q30", "cs": "CS 6", "type": "mc", "stimulus": "A conflict about which level of government should control a policy area is under debate.", "stem": "What broad constitutional concept is at the center of that debate?", "choices": ["federalism", "judicial review", "due process", "popular sovereignty"], "answer": [0]}]];
+
+function hash32(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function mulberry32(a){ return function(){ let t = a += 0x6D2B79F5; t=Math.imul(t^(t>>>15), t|1); t^=t+Math.imul(t^(t>>>7), t|61); return ((t^(t>>>14))>>>0)/4294967296; }; }
+function shuffleBlocks(blocks, seedStr){ const a=blocks.slice(), rand=mulberry32(hash32(seedStr)); for(let i=a.length-1;i>0;i--){ const j=Math.floor(rand()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function shuffleIndices(length, seedStr){ const arr=Array.from({length},(_,i)=>i), rand=mulberry32(hash32(seedStr)); for(let i=arr.length-1;i>0;i--){ const j=Math.floor(rand()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+function remapQuestionChoices(question, seedStr){
+  if(!Array.isArray(question.choices) || question.choices.length < 2) return {...question};
+  const order = shuffleIndices(question.choices.length, seedStr);
+  const newChoices = order.map(i => question.choices[i]);
+  const inverseMap = {};
+  order.forEach((oldIdx, newIdx) => inverseMap[oldIdx] = newIdx);
+  let newAnswer = question.answer;
+  if(Array.isArray(question.answer)) newAnswer = question.answer.map(oldIdx => inverseMap[oldIdx]).sort((a,b)=>a-b);
+  return {...question, choices:newChoices, answer:newAnswer, _choiceOrder:order};
+}
+
+let QUESTIONS = [];
+let state = { studentName:"", startedAt:null, current:0, answers:[], submitted:false, score:null, attemptNumber:1, questionOrderSeed:null };
+
+function escapeHtml(str){ return String(str ?? "").replace(/[&<>"']/g, s => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[s])); }
+function nowLocalString(d){ return new Date(d).toLocaleString(); }
+function formatRuntime(seconds){ const m=Math.floor(seconds/60).toString().padStart(2,"0"); const s=Math.floor(seconds%60).toString().padStart(2,"0"); return `${m}:${s}`; }
+function letter(i){ return ["A","B","C","D","E","F"][i] || ""; }
+function sameArray(a,b){ return Array.isArray(a) && Array.isArray(b) && a.length===b.length && a.every((v,i)=>v===b[i]); }
+function normalizeMulti(arr){ return [...arr].sort((a,b)=>a-b); }
+function isCorrect(q, answer){ if(q.type==="multi") return Array.isArray(answer) && sameArray(normalizeMulti(answer), normalizeMulti(q.answer)); return Array.isArray(answer) && sameArray(answer, q.answer); }
+function buildQuestions(){
+  const seed = state.questionOrderSeed || "default-seed";
+  const shuffledBlocks = shuffleBlocks(QUESTION_BLOCKS, `${seed}|block-order`);
+  QUESTIONS = shuffledBlocks.flat().map((q, idx) => remapQuestionChoices(q, `${seed}|${q.id || idx}|choices`));
+  if(!Array.isArray(state.answers) || state.answers.length !== QUESTIONS.length) state.answers = Array(QUESTIONS.length).fill(null);
+}
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function load(){ try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw){ const parsed=JSON.parse(raw); if(parsed && !parsed.submitted) state=parsed; } }catch(err){} }
+function hardRestart(){ localStorage.removeItem(STORAGE_KEY); if(TEACHER_OVERRIDE) localStorage.removeItem(ATTEMPT_KEY); location.reload(); }
+function countAnswered(){ return state.answers.filter(a => a !== null).length; }
+function isLocked(){ if(TEACHER_OVERRIDE) return false; return localStorage.getItem(ATTEMPT_KEY) === "USED"; }
+function teacherBadge(){ return TEACHER_OVERRIDE ? `<span class="pill">Teacher Override Active</span>` : ``; }
+function buildLockedScreen(){ document.getElementById("app").innerHTML = `<a class="back-link" href="../index.html">← Back to Hub</a><div class="panel lock-box"><div class="kicker">Attempt Locked</div><h1>${TEST_META.title}</h1><p class="sub">This segment has already been completed on this device/browser.</p><div class="footer-actions">${TEACHER_OVERRIDE ? `<button class="warn" onclick="teacherUnlockNow()">Teacher Unlock This Browser</button>` : ``}<button onclick="location.href='../index.html'">Back to Hub</button></div></div>`; }
+function teacherUnlockNow(){ localStorage.removeItem(ATTEMPT_KEY); localStorage.removeItem(STORAGE_KEY); location.reload(); }
+function buildIntro(){
+  document.getElementById("app").innerHTML = `<a class="back-link" href="../index.html">← Back to Hub</a><div class="panel name-card"><div class="kicker">Legend Mastery Series • Government</div><h1>${TEST_META.title}</h1><p class="sub">30-question OST-style segment. Name is required to begin. One attempt only.</p><input id="nameInput" class="input" type="text" maxlength="60" placeholder="Enter your name to begin" /><div class="help">Core Fix application-focused Day 2 segment for Period 6. This set is intentionally built around why / evidence reasoning, Part A / Part B support, and multi-select decisions tied to the group's most important growth areas.</div><div class="footer-actions">${TEACHER_OVERRIDE ? `<span class="tag">Teacher Override Active</span>` : ``}<button id="startBtn">Start Test</button></div></div>`;
+  document.getElementById("startBtn").onclick = () => {
+    const name=document.getElementById("nameInput").value.trim();
+    if(!name){ alert("Enter your name to begin."); return; }
+    state.studentName=name; state.startedAt=new Date().toISOString(); state.attemptNumber=1;
+    state.questionOrderSeed=`${state.studentName}|${state.startedAt}|${TEST_META.title}`; buildQuestions(); save(); renderTest();
+  };
+}
+function buildTopbar(){
+  const started=new Date(state.startedAt), runtime=formatRuntime((Date.now()-started.getTime())/1000), answered=countAnswered(), progressPct=Math.round((answered/QUESTIONS.length)*100);
+  return `<a class="back-link" href="../index.html">← Back to Hub</a><div class="topbar"><div class="topbar-left"><button class="danger" onclick="hardRestart()">Restart Test</button></div><div class="topbar-right">${teacherBadge()}<span class="pill">Name: ${escapeHtml(state.studentName)}</span><span class="pill">Attempt: ${state.attemptNumber}</span><span class="pill">Started: ${escapeHtml(nowLocalString(started))}</span><span class="pill">Runtime: <span id="runtimeDisplay">${runtime}</span></span></div></div><div class="panel"><div class="stats"><div class="stat"><div class="stat-label">Test</div><div class="stat-value">${TEST_META.day} ${TEST_META.segment}</div></div><div class="stat"><div class="stat-label">Focus</div><div class="stat-value">${TEST_META.focus}</div></div><div class="stat"><div class="stat-label">Progress</div><div class="stat-value">${answered} / ${QUESTIONS.length}</div></div><div class="stat"><div class="stat-label">Completion</div><div class="stat-value">${progressPct}%</div></div></div><div class="progress-wrap"><div class="progress-bar" style="width:${progressPct}%"></div></div></div>`;
+}
+function renderQuestion(){
+  const q=QUESTIONS[state.current], currentAnswer=state.answers[state.current], multi=q.type==="multi";
+  document.getElementById("app").innerHTML = buildTopbar() + `
+    <div class="panel question-card">
+      <div class="q-type">Question ${state.current + 1} of ${QUESTIONS.length} • ${q.type.toUpperCase()} • ${q.cs}</div>
+      ${q.stimulus ? `<div class="stimulus">${escapeHtml(q.stimulus)}</div>` : ``}
+      <div class="q-stem">${escapeHtml(q.stem)}</div>
+      ${multi ? `<p class="multi-note">Select all correct answers, then press Confirm Selection.</p>` : ``}
+      <div class="choices">
+        ${q.choices.map((choice, i) => { const selected = Array.isArray(currentAnswer) && currentAnswer.includes(i); return `<button class="choice ${selected ? "selected" : ""}" onclick="${multi ? `toggleMulti(${i})` : `selectSingle(${i})`}"><span class="choice-letter">${letter(i)}.</span> ${escapeHtml(choice)}</button>`; }).join("")}
+      </div>
+      <div class="footer-actions">
+        <button class="secondary" ${state.current === 0 ? "disabled" : ""} onclick="prevQuestion()">Previous</button>
+        <button class="secondary" onclick="skipQuestion()">Skip</button>
+        ${multi ? `<button onclick="confirmMulti()">Confirm Selection</button>` : ``}
+        <button class="warn" onclick="reviewScreen()">Review / Submit</button>
+      </div>
+    </div>`;
+}
+function renderTest(){ if(state.current<0) state.current=0; if(state.current>=QUESTIONS.length) state.current=QUESTIONS.length-1; renderQuestion(); }
+function selectSingle(i){ state.answers[state.current]=[i]; save(); if(state.current<QUESTIONS.length-1){ state.current++; save(); renderQuestion(); } else { reviewScreen(); } }
+function toggleMulti(i){ const current=Array.isArray(state.answers[state.current]) ? [...state.answers[state.current]] : []; const idx=current.indexOf(i); if(idx>=0) current.splice(idx,1); else current.push(i); state.answers[state.current]=current; save(); renderQuestion(); }
+function confirmMulti(){ const current=state.answers[state.current]; if(!Array.isArray(current) || current.length===0){ alert("Select at least one answer before confirming."); return; } if(state.current<QUESTIONS.length-1){ state.current++; save(); renderQuestion(); } else { reviewScreen(); } }
+function prevQuestion(){ if(state.current>0){ state.current--; save(); renderQuestion(); } }
+function skipQuestion(){ if(state.current<QUESTIONS.length-1){ state.current++; save(); renderQuestion(); } else { reviewScreen(); } }
+function jumpToQuestion(idx){ state.current=idx; save(); renderQuestion(); }
+function reviewScreen(){
+  const answered=countAnswered(), unanswered=QUESTIONS.length-answered;
+  document.getElementById("app").innerHTML = buildTopbar() + `<div class="panel"><h2>Review Before Submitting</h2><p class="sub">Answered: ${answered} of ${QUESTIONS.length}. Unanswered: ${unanswered}.</p><div class="review-box">${QUESTIONS.map((q, idx) => { const ans=state.answers[idx]; const answerText=!ans ? "No answer" : q.type==="multi" ? "Answered: " + normalizeMulti(ans).map(v => letter(v)).join(", ") : "Answered: " + letter(ans[0]); return `<div class="review-item"><div class="review-top"><strong>Q${String(idx + 1).padStart(2,"0")}</strong><span class="tag">${q.cs}</span></div><div class="muted">${escapeHtml(q.stem)}</div><div style="margin-top:8px;"><span class="tag">${answerText}</span></div><div class="footer-actions"><button class="secondary" onclick="jumpToQuestion(${idx})">Go to Question</button></div></div>`; }).join("")}</div><hr class="sep"><div class="footer-actions"><button class="secondary" onclick="renderQuestion()">Back to Test</button><button onclick="submitTest()">Submit Segment</button></div></div>`;
+}
+async function submitTest(){
+  if(state.submitted) return;
+  const endedAt=new Date().toISOString();
+  const score=QUESTIONS.reduce((sum, q, idx) => sum + (isCorrect(q, state.answers[idx]) ? 1 : 0), 0);
+  const accuracy=Math.round((score/QUESTIONS.length)*100);
+  const payload={ studentName:state.studentName, subject:TEST_META.subject, week:TEST_META.week, day:TEST_META.day, segment:TEST_META.segment, title:TEST_META.title, focus:TEST_META.focus, startedAt:state.startedAt, endedAt, runtimeSeconds:Math.round((new Date(endedAt)-new Date(state.startedAt))/1000), score, total:QUESTIONS.length, accuracy, attemptNumber:state.attemptNumber, questions:QUESTIONS.map((q, idx) => ({ id:q.id, cs:q.cs, type:q.type, stem:q.stem, correctAnswer:q.answer, studentAnswer:state.answers[idx], correct:isCorrect(q, state.answers[idx]) ? 1 : 0 })) };
+  try{ await fetch(SCRIPT_URL, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload) }); }catch(err){}
+  state.submitted=true; state.score=score; save(); localStorage.setItem(ATTEMPT_KEY, "USED"); renderResult(score, accuracy, endedAt);
+}
+function renderResult(score, accuracy, endedAt){
+  const started=new Date(state.startedAt), ended=new Date(endedAt);
+  document.getElementById("app").innerHTML = `<a class="back-link" href="../index.html">← Back to Hub</a><div class="panel"><div class="kicker">Submission Complete</div><h1>${escapeHtml(state.studentName)} — ${TEST_META.title}</h1><p class="sub">This attempt is now locked on this browser.</p><div class="stats"><div class="stat"><div class="stat-label">Score</div><div class="stat-value">${score} / ${QUESTIONS.length}</div></div><div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value">${accuracy}%</div></div><div class="stat"><div class="stat-label">Started</div><div class="stat-value">${escapeHtml(nowLocalString(started))}</div></div><div class="stat"><div class="stat-label">Finished</div><div class="stat-value">${escapeHtml(nowLocalString(ended))}</div></div></div><div class="footer-actions"><button onclick="location.href='../index.html'">Back to Hub</button></div></div>`;
+}
+function tickRuntime(){ const el=document.getElementById("runtimeDisplay"); if(el && state.startedAt) el.textContent = formatRuntime((Date.now() - new Date(state.startedAt).getTime())/1000); }
+load();
+if(isLocked()) buildLockedScreen();
+else if(state.studentName && state.startedAt){ buildQuestions(); renderTest(); setInterval(tickRuntime, 1000); }
+else buildIntro();
+</script>
+</body>
+</html>
 
